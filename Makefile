@@ -8,10 +8,10 @@ JAVACFLAGS =
 
 JCLASSPATH = .:$(TOOLS)
 
-CUP = java -classpath $(JCLASSPATH) java_cup/Main
+CUP = java -classpath $(JCLASSPATH) java_cup/src.Main
 CUPFLAGS =
 
-JLEX = java -classpath $(JCLASSPATH) JLex/Main
+JLEX = java -classpath $(JCLASSPATH) JLex/src.Main
 JLEXFLAGS =
 
 CLASSES = parser.class Yylex.class \

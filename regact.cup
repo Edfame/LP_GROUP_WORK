@@ -50,19 +50,19 @@ etiqueta ::= IDENTIFICADOR:e DOIS_PONTOS
 	 ;
 
 instrucao ::= 
-	      ADD
-	  |   SUB
-	  |   MULT
-	  |   DIV
+	      ADD                                   {: maquina.adionarInstrucao(new Add());:}
+	  |   SUB                                   {: maquina.adionarInstrucao(new Sub());:}
+      |   MULT                                  {: maquina.adionarInstrucao(new Mult());:}
+	  |   DIV                                   {: maquina.adionarInstrucao(new Add());:}
 	  |   MOD
 	  |   EXP
-	  |   PUSH_INT INTEIRO:i
+	  |   PUSH_INT INTEIRO:i                    {: maquina.addinst(new PushInt(i)); :}
 	  |   PUSH_VAR INTEIRO:d INTEIRO:n
 	  |   PUSH_ARG INTEIRO:d INTEIRO:n
 	  |   STORE_VAR INTEIRO:d INTEIRO:n
 	  |   STORE_ARG INTEIRO:d INTEIRO:n
 	  |   SET_ARG INTEIRO:n
-          |   CALL INTEIRO:d IDENTIFICADOR:p
+      |   CALL INTEIRO:d IDENTIFICADOR:p
 	  |   LOCALS INTEIRO:a INTEIRO:v
 	  |   RETURN
 	  |   JUMP IDENTIFICADOR:e

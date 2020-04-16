@@ -136,7 +136,7 @@
      Fixed dynamic reallocation of accept action buffers.
 
   Version 1.1.1, September 3, 1996 [Andrew Appel]
-    Made the class "Main" instead of "JavaLex", 
+    Made the class "src.Main" instead of "JavaLex",
      improved the installation instructions to reflect this.
 
   Version 1.1, August 15, 1996  [Andrew Appel]
@@ -194,7 +194,7 @@ import java.util.Vector;
   2) Repeated accept rules.
   6) Clean up the CAlloc class and use buffered
   allocation.
-  9) Add to spec about extending character set.
+  9) src.Add to spec about extending character set.
   11) m_verbose -- what should be done with it?
   12) turn lexical analyzer into a coherent
   Java package
@@ -3254,7 +3254,7 @@ class CNfa2Dfa
 	    
 	    m_spec.m_state_dtrans[istate] = m_spec.m_dtrans_vector.size();
 
-	    /* Main loop of CDTrans creation. */
+	    /* src.Main loop of CDTrans creation. */
 	    while (null != (dfa = get_unmarked()))
 	      {
 		System.out.print(".");
@@ -3399,7 +3399,7 @@ class CNfa2Dfa
 	    nfa_stack.push(state);
 	  }
 
-	/* Main loop. */
+	/* src.Main loop. */
 	while (false == nfa_stack.empty())
 	  {
 	    state = (CNfa) nfa_stack.pop();
@@ -3817,7 +3817,7 @@ class CAlloc
 }
 
 /***************************************************************
-  Class: Main
+  Class: src.Main
   Description: Top-level lexical analyzer generator function.
  **************************************************************/
 public class Main
@@ -3835,7 +3835,7 @@ public class Main
 
 	if (arg.length < 1)
 	  {
-	    System.out.println("Usage: JLex.Main <filename>");
+	    System.out.println("Usage: JLex.src.Main <filename>");
 	    return;
 	  }
 
@@ -6560,7 +6560,7 @@ class CLexGen
 			       + "\".");
 	  }
 
-	/* Add macro name and definition to table. */
+	/* src.Add macro name and definition to table. */
 	m_spec.m_macros.put(new String(m_input.m_line,start_name,count_name),
 			    new String(m_input.m_line,start_def,count_def));
       }

@@ -1,5 +1,5 @@
-
-// Programa principal para a implementacaoo da maquina abstracta TISC.
+package src;
+// Programa principal para a implementacaoo da maquina abstracta src.TISC.
 
 public class Main {
   public static void main(String args[])
