@@ -1,15 +1,17 @@
+# alterar para o caminho onde estao os ficheiros
+TOOLS=~/
 
 JAVA = java
 JAVAFLAGS =
 JAVAC = javac
 JAVACFLAGS =
 
-JCLASSPATH = .:/usr/share/CUP
+JCLASSPATH = .:$(TOOLS)
 
-CUP = cup
-CUPFLAGS = -nosummary
+CUP = java -classpath $(JCLASSPATH) java_cup/Main
+CUPFLAGS =
 
-JLEX = jlex
+JLEX = java -classpath $(JCLASSPATH) JLex/Main
 JLEXFLAGS =
 
 CLASSES = parser.class Yylex.class \

@@ -1,1 +1,0 @@
-# LP_GROUP_WORK

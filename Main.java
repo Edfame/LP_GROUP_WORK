@@ -8,7 +8,7 @@ public class Main {
     parser aParser = new parser();
     TISC maquina;
 
-    // carrega o programa XISC
+    // carrega o programa TISC
     maquina = (TISC) aParser.parse().value;
 
     // e executa-o
