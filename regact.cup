@@ -45,30 +45,30 @@ programa ::= programa etiqueta instrucao
          |
 	 ;
 
-etiqueta ::= IDENTIFICADOR:e DOIS_PONTOS
+etiqueta ::= IDENTIFICADOR:e DOIS_PONTOS        {: maquina.adionarInstrucao(new Etiqueta(e)); :}
 	 |
 	 ;
 
 instrucao ::= 
-	      ADD                                   {: maquina.adionarInstrucao(new Add());:}
-	  |   SUB                                   {: maquina.adionarInstrucao(new Sub());:}
-      |   MULT                                  {: maquina.adionarInstrucao(new Mult());:}
-	  |   DIV                                   {: maquina.adionarInstrucao(new Add());:}
-	  |   MOD
-	  |   EXP
-	  |   PUSH_INT INTEIRO:i                    {: maquina.addinst(new PushInt(i)); :}
-	  |   PUSH_VAR INTEIRO:d INTEIRO:n
-	  |   PUSH_ARG INTEIRO:d INTEIRO:n
-	  |   STORE_VAR INTEIRO:d INTEIRO:n
-	  |   STORE_ARG INTEIRO:d INTEIRO:n
-	  |   SET_ARG INTEIRO:n
-      |   CALL INTEIRO:d IDENTIFICADOR:p
-	  |   LOCALS INTEIRO:a INTEIRO:v
-	  |   RETURN
-	  |   JUMP IDENTIFICADOR:e
-	  |   JEQ IDENTIFICADOR:e
-	  |   JLT IDENTIFICADOR:e
-	  |   PRINT
-	  |   PRINT_STR STRING:s
-	  |   PRINT_NL
+	      ADD                                   {: maquina.adionarInstrucao(new Add()); :}
+	  |   SUB                                   {: maquina.adionarInstrucao(new Sub()); :}
+      |   MULT                                  {: maquina.adionarInstrucao(new Mult()); :}
+	  |   DIV                                   {: maquina.adionarInstrucao(new Div()); :}
+	  |   MOD                                   {: maquina.adionarInstrucao(new Mod()); :}
+	  |   EXP                                   {: maquina.adionarInstrucao(new Exp()); :}
+	  |   PUSH_INT INTEIRO:i                    {: maquina.adionarInstrucao(new PushInt(i)); :}
+	  |   PUSH_VAR INTEIRO:d INTEIRO:n          {: maquina.adionarInstrucao(new PushVar(d,n)); :}
+	  |   PUSH_ARG INTEIRO:d INTEIRO:n          {: maquina.adionarInstrucao(new PushArg(d,n)); :}
+	  |   STORE_VAR INTEIRO:d INTEIRO:n         {: maquina.adionarInstrucao(new StoreVar(d,n)); :}
+	  |   STORE_ARG INTEIRO:d INTEIRO:n         {: maquina.adionarInstrucao(new StoreArg(d, n)); :}
+	  |   SET_ARG INTEIRO:n                     {: maquina.adionarInstrucao(new SetArg(n)); :}
+      |   CALL INTEIRO:d IDENTIFICADOR:p        {: maquina.adionarInstrucao(new Call(d,p)); :}
+	  |   LOCALS INTEIRO:a INTEIRO:v            {: maquina.adionarInstrucao(new Locals(a,v)); :}
+	  |   RETURN                                {: maquina.adionarInstrucao(new Return()); :}
+	  |   JUMP IDENTIFICADOR:e                  {: maquina.adionarInstrucao(new Jump(e)); :}
+	  |   JEQ IDENTIFICADOR:e                   {: maquina.adionarInstrucao(new Jeq(e)); :}
+	  |   JLT IDENTIFICADOR:e                   {: maquina.adionarInstrucao(new Jlt(e)); :}
+	  |   PRINT                                 {: maquina.adionarInstrucao(new Print()); :}
+	  |   PRINT_STR STRING:s                    {: maquina.adionarInstrucao(new PrintString(s)); :}
+	  |   PRINT_NL                              {: maquina.adionarInstrucao(new PrintNl()); :}
 	  ;
