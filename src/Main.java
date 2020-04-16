@@ -5,7 +5,7 @@ public class Main {
   public static void main(String args[])
     throws Exception
   {
-    parser aParser = new parser();
+    /*parser aParser = new parser();
     TISC maquina;
 
     // carrega o programa TISC
@@ -13,6 +13,6 @@ public class Main {
 
     // e executa-o
     if (maquina != null)
-      maquina.executa();
+      maquina.executa();*/
   }
 }
