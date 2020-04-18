@@ -23,7 +23,7 @@ public class TISC {
   public void printMemoriaDeInstrucoes() {
 
     memoriaDeInstrucoes.forEach(
-            instrucao -> System.out.println(instrucao.getClass())
+            instrucao -> System.out.println(instrucao.getClass().getSimpleName())
     );
 
   }
