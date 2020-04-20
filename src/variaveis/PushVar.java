@@ -1,4 +1,6 @@
-package src;
+package src.variaveis;
+
+import src.Instrucao;
 
 public class PushVar extends Instrucao {
 
@@ -23,5 +25,13 @@ public class PushVar extends Instrucao {
     @Override
     public void executar() {
 
+    }
+
+    @Override
+    public String toString() {
+        return "PushVar{" +
+                "distancia=" + distancia +
+                ", numero=" + numero +
+                '}';
     }
 }

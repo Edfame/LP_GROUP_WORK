@@ -1,4 +1,6 @@
-package src;
+package src.funcoes;
+
+import src.Instrucao;
 
 public class Locals extends Instrucao {
 
@@ -23,5 +25,13 @@ public class Locals extends Instrucao {
     @Override
     public void executar() {
 
+    }
+
+    @Override
+    public String toString() {
+        return "Locals{" +
+                "argumentos=" + argumentos +
+                ", variaveis=" + variaveis +
+                '}';
     }
 }

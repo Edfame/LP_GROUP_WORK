@@ -1,4 +1,6 @@
-package src;
+package src.variaveis;
+
+import src.Instrucao;
 
 public class StoreVar extends Instrucao {
 
@@ -23,5 +25,13 @@ public class StoreVar extends Instrucao {
     @Override
     public void executar() {
 
+    }
+
+    @Override
+    public String toString() {
+        return "StoreVar{" +
+                "distancia=" + distancia +
+                ", numero=" + numero +
+                '}';
     }
 }

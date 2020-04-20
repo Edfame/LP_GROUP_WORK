@@ -1,6 +1,12 @@
 package src;
 // Tiny Instruction Set Computer
 
+import src.aritmeticas.Add;
+import src.aritmeticas.Sub;
+import src.funcoes.Call;
+import src.funcoes.Return;
+import src.funcoes.SetArg;
+
 import java.util.ArrayList;
 import java.util.Hashtable;
 
@@ -45,10 +51,13 @@ public class TISC {
      */
     public void printMemoriaDeInstrucoes() {
 
-        memoriaDeInstrucoes.forEach(
-                instrucao -> System.out.println(instrucao.getClass().getSimpleName())
-        );
+        memoriaDeInstrucoes.forEach(System.out::println);
 
+    }
+
+    public void printEtiquetas() {
+
+        System.out.println(etiquetas.toString());
     }
 
     /** Executa o programa src.TISC carregado na maquina. */
@@ -62,9 +71,11 @@ public class TISC {
         TISC t = new TISC();
 
         t.adionarInstrucao(new Add());
+        t.adicionarEtiqueta(new Etiqueta("INICIO"));
         t.adionarInstrucao(new Sub());
         t.adionarInstrucao(new SetArg(5));
         t.adionarInstrucao(new Return());
+        t.adionarInstrucao(new Call(5, new Etiqueta("INICIO")));
 
         t.printMemoriaDeInstrucoes();
     }

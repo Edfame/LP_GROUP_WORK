@@ -1,4 +1,6 @@
-package src;
+package src.argumentos;
+
+import src.Instrucao;
 
 public class PushArg extends Instrucao {
 
@@ -23,5 +25,13 @@ public class PushArg extends Instrucao {
     @Override
     public void executar() {
 
+    }
+
+    @Override
+    public String toString() {
+        return "PushArg{" +
+                "distancia=" + distancia +
+                ", numero=" + numero +
+                '}';
     }
 }

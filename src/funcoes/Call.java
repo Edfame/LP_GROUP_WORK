@@ -1,4 +1,7 @@
-package src;
+package src.funcoes;
+
+import src.Etiqueta;
+import src.Instrucao;
 
 public class Call extends Instrucao {
 
@@ -23,5 +26,13 @@ public class Call extends Instrucao {
     @Override
     public void executar() {
 
+    }
+
+    @Override
+    public String toString() {
+        return "Call{" +
+                "distancia=" + distancia +
+                ", etiqueta=" + etiqueta +
+                '}';
     }
 }

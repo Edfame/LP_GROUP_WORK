@@ -1,4 +1,7 @@
-package src;
+package src.saltos;
+
+import src.Etiqueta;
+import src.Instrucao;
 
 public class Jump extends Instrucao {
 
@@ -16,5 +19,12 @@ public class Jump extends Instrucao {
     @Override
     public void executar() {
 
+    }
+
+    @Override
+    public String toString() {
+        return "Jump{" +
+                "etiqueta=" + etiqueta +
+                '}';
     }
 }

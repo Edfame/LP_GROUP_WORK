@@ -14,4 +14,10 @@ public class Etiqueta {
         return etiqueta;
     }
 
+    @Override
+    public String toString() {
+        return "Etiqueta{" +
+                "etiqueta='" + etiqueta + '\'' +
+                '}';
+    }
 }

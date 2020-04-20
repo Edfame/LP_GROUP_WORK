@@ -1,4 +1,6 @@
-package src;
+package src.saida;
+
+import src.Instrucao;
 
 public class PrintString extends Instrucao {
 
@@ -17,5 +19,12 @@ public class PrintString extends Instrucao {
     @Override
     public void executar() {
 
+    }
+
+    @Override
+    public String toString() {
+        return "PrintString{" +
+                "string='" + string + '\'' +
+                '}';
     }
 }

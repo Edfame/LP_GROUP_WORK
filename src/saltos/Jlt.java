@@ -1,4 +1,7 @@
-package src;
+package src.saltos;
+
+import src.Etiqueta;
+import src.Instrucao;
 
 public class Jlt extends Instrucao {
 
@@ -17,5 +20,12 @@ public class Jlt extends Instrucao {
     @Override
     public void executar() {
 
+    }
+
+    @Override
+    public String toString() {
+        return "Jlt{" +
+                "etiqueta=" + etiqueta +
+                '}';
     }
 }

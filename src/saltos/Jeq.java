@@ -1,4 +1,7 @@
-package src;
+package src.saltos;
+
+import src.Etiqueta;
+import src.Instrucao;
 
 public class Jeq extends Instrucao {
 
@@ -17,5 +20,12 @@ public class Jeq extends Instrucao {
     @Override
     public void executar() {
 
+    }
+
+    @Override
+    public String toString() {
+        return "Jeq{" +
+                "etiqueta=" + etiqueta +
+                '}';
     }
 }

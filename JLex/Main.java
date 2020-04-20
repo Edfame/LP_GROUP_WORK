@@ -194,7 +194,7 @@ import java.util.Vector;
   2) Repeated accept rules.
   6) Clean up the CAlloc class and use buffered
   allocation.
-  9) src.Add to spec about extending character set.
+  9) src.aritmeticas.Add to spec about extending character set.
   11) m_verbose -- what should be done with it?
   12) turn lexical analyzer into a coherent
   Java package
@@ -6560,7 +6560,7 @@ class CLexGen
 			       + "\".");
 	  }
 
-	/* src.Add macro name and definition to table. */
+	/* src.aritmeticas.Add macro name and definition to table. */
 	m_spec.m_macros.put(new String(m_input.m_line,start_name,count_name),
 			    new String(m_input.m_line,start_def,count_def));
       }

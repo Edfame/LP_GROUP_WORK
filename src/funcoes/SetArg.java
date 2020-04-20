@@ -1,4 +1,6 @@
-package src;
+package src.funcoes;
+
+import src.Instrucao;
 
 public class SetArg extends Instrucao {
 
@@ -17,5 +19,12 @@ public class SetArg extends Instrucao {
     @Override
     public void executar() {
 
+    }
+
+    @Override
+    public String toString() {
+        return "SetArg{" +
+                "numero=" + numero +
+                '}';
     }
 }

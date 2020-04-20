@@ -1,4 +1,6 @@
-package src;
+package src.argumentos;
+
+import src.Instrucao;
 
 public class StoreArg extends Instrucao {
 
@@ -23,5 +25,13 @@ public class StoreArg extends Instrucao {
     @Override
     public void executar() {
 
+    }
+
+    @Override
+    public String toString() {
+        return "StoreArg{" +
+                "distancia=" + distancia +
+                ", numero=" + numero +
+                '}';
     }
 }
