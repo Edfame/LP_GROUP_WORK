@@ -1,16 +1,16 @@
 package src;
 
-public class Jeq extends Instrucao{
+public class Jeq extends Instrucao {
 
-    private String etiqueta;
+    private Etiqueta etiqueta;
 
-    public Jeq(String etiqueta) {
+    public Jeq(Etiqueta etiqueta) {
 
         this.etiqueta = etiqueta;
 
     }
 
-    public String getEtiqueta() {
+    public Etiqueta getEtiqueta() {
         return etiqueta;
     }
 

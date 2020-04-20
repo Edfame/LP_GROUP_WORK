@@ -1,6 +1,6 @@
 package src;
 
-public class Mult extends Instrucao{
+public class Mult extends Instrucao {
 
     public Mult() {
 

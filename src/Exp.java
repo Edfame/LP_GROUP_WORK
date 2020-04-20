@@ -1,6 +1,6 @@
 package src;
 
-public class Exp extends Instrucao{
+public class Exp extends Instrucao {
 
     public Exp() {
 

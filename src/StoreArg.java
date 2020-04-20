@@ -1,6 +1,6 @@
 package src;
 
-public class StoreArg extends Instrucao{
+public class StoreArg extends Instrucao {
 
     private int distancia;
     private int numero;

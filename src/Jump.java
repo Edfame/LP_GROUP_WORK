@@ -2,14 +2,14 @@ package src;
 
 public class Jump extends Instrucao {
 
-    private String etiqueta;
+    private Etiqueta etiqueta;
 
-    public Jump(String etiqueta) {
+    public Jump(Etiqueta etiqueta) {
 
         this.etiqueta = etiqueta;
     }
 
-    public String getEtiqueta() {
+    public Etiqueta getEtiqueta() {
         return etiqueta;
     }
 

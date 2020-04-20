@@ -1,6 +1,6 @@
 package src;
 
-public class Div extends Instrucao{
+public class Div extends Instrucao {
 
     public Div() {
 

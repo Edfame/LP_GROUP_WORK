@@ -1,6 +1,6 @@
 package src;
 
-public class Etiqueta extends Instrucao{
+public class Etiqueta {
 
     private String etiqueta;
 
@@ -14,8 +14,4 @@ public class Etiqueta extends Instrucao{
         return etiqueta;
     }
 
-    @Override
-    public void executar() {
-
-    }
 }

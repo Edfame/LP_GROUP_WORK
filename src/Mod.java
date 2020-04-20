@@ -1,6 +1,6 @@
 package src;
 
-public class Mod extends Instrucao{
+public class Mod extends Instrucao {
 
     public Mod() {
 

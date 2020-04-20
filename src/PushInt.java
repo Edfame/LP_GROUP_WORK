@@ -1,6 +1,6 @@
 package src;
 
-public class PushInt extends Instrucao{
+public class PushInt extends Instrucao {
 
     private int inteiro;
 

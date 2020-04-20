@@ -3,9 +3,9 @@ package src;
 public class Call extends Instrucao {
 
     private int distancia;
-    private String etiqueta;
+    private Etiqueta etiqueta;
 
-    public Call(int distancia, String etiqueta) {
+    public Call(int distancia, Etiqueta etiqueta) {
 
         this.distancia = distancia;
         this.etiqueta = etiqueta;
@@ -16,7 +16,7 @@ public class Call extends Instrucao {
         return distancia;
     }
 
-    public String getEtiqueta() {
+    public Etiqueta getEtiqueta() {
         return etiqueta;
     }
 

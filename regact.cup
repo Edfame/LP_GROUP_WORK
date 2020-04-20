@@ -45,7 +45,7 @@ programa ::= programa etiqueta instrucao
          |
 	 ;
 
-etiqueta ::= IDENTIFICADOR:e DOIS_PONTOS        {: maquina.adionarInstrucao(new Etiqueta(e)); :}
+etiqueta ::= IDENTIFICADOR:e DOIS_PONTOS        {: maquina.adicionarEtiqueta(new Etiqueta(e)); :}
 	 |
 	 ;
 
@@ -62,12 +62,12 @@ instrucao ::=
 	  |   STORE_VAR INTEIRO:d INTEIRO:n         {: maquina.adionarInstrucao(new StoreVar(d,n)); :}
 	  |   STORE_ARG INTEIRO:d INTEIRO:n         {: maquina.adionarInstrucao(new StoreArg(d, n)); :}
 	  |   SET_ARG INTEIRO:n                     {: maquina.adionarInstrucao(new SetArg(n)); :}
-      |   CALL INTEIRO:d IDENTIFICADOR:p        {: maquina.adionarInstrucao(new Call(d,p)); :}
+      |   CALL INTEIRO:d IDENTIFICADOR:p        {: maquina.adionarInstrucao(new Call(d,new Etiqueta(p))); :}
 	  |   LOCALS INTEIRO:a INTEIRO:v            {: maquina.adionarInstrucao(new Locals(a,v)); :}
 	  |   RETURN                                {: maquina.adionarInstrucao(new Return()); :}
-	  |   JUMP IDENTIFICADOR:e                  {: maquina.adionarInstrucao(new Jump(e)); :}
-	  |   JEQ IDENTIFICADOR:e                   {: maquina.adionarInstrucao(new Jeq(e)); :}
-	  |   JLT IDENTIFICADOR:e                   {: maquina.adionarInstrucao(new Jlt(e)); :}
+	  |   JUMP IDENTIFICADOR:e                  {: maquina.adionarInstrucao(new Jump(new Etiqueta(e))); :}
+	  |   JEQ IDENTIFICADOR:e                   {: maquina.adionarInstrucao(new Jeq(new Etiqueta(e)))); :}
+	  |   JLT IDENTIFICADOR:e                   {: maquina.adionarInstrucao(new Jlt(new Etiqueta(e)))); :}
 	  |   PRINT                                 {: maquina.adionarInstrucao(new Print()); :}
 	  |   PRINT_STR STRING:s                    {: maquina.adionarInstrucao(new PrintString(s)); :}
 	  |   PRINT_NL                              {: maquina.adionarInstrucao(new PrintNl()); :}

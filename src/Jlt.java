@@ -1,16 +1,16 @@
 package src;
 
-public class Jlt extends Instrucao{
+public class Jlt extends Instrucao {
 
-    private String etiqueta;
+    private Etiqueta etiqueta;
 
-    public Jlt(String etiqueta) {
+    public Jlt(Etiqueta etiqueta) {
 
         this.etiqueta = etiqueta;
 
     }
 
-    public String getEtiqueta() {
+    public Etiqueta getEtiqueta() {
         return etiqueta;
     }
 

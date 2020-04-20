@@ -1,6 +1,6 @@
 package src;
 
-public class PushArg extends Instrucao{
+public class PushArg extends Instrucao {
 
     private int distancia;
     private int numero;

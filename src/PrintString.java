@@ -1,6 +1,6 @@
 package src;
 
-public class PrintString extends Instrucao{
+public class PrintString extends Instrucao {
 
     private String string;
 
