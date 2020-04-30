@@ -1,4 +1,14 @@
-
+import src.argumentos.*;
+import src.aritmeticas.*;
+import src.funcoes.*;
+import src.inteiros.*;
+import src.saida.*;
+import src.saltos.*;
+import src.variaveis.*;
+import src.Main;
+import src.TISC;
+import src.Instrucao;
+import src.Etiqueta;
 import java_cup.runtime.*;
 
 action code {:
@@ -17,7 +27,7 @@ parser code {:
 		       + " **");
   }
 
-  public void report_fatal_error(String message, Object _) {
+  public void report_fatal_error(String message, Object error_info) {
     System.err.println("** " + message);
   }
 :} ;
@@ -49,25 +59,25 @@ etiqueta ::= IDENTIFICADOR:e DOIS_PONTOS        {: maquina.adicionarEtiqueta(new
 	 |
 	 ;
 
-instrucao ::= 
+instrucao ::=
 	      ADD                                   {: maquina.adionarInstrucao(new Add()); :}
 	  |   SUB                                   {: maquina.adionarInstrucao(new Sub()); :}
       |   MULT                                  {: maquina.adionarInstrucao(new Mult()); :}
 	  |   DIV                                   {: maquina.adionarInstrucao(new Div()); :}
 	  |   MOD                                   {: maquina.adionarInstrucao(new Mod()); :}
 	  |   EXP                                   {: maquina.adionarInstrucao(new Exp()); :}
-	  |   PUSH_INT INTEIRO:i                    {: maquina.adionarInstrucao(new PushInt(i)); :}
-	  |   PUSH_VAR INTEIRO:d INTEIRO:n          {: maquina.adionarInstrucao(new PushVar(d,n)); :}
-	  |   PUSH_ARG INTEIRO:d INTEIRO:n          {: maquina.adionarInstrucao(new PushArg(d,n)); :}
-	  |   STORE_VAR INTEIRO:d INTEIRO:n         {: maquina.adionarInstrucao(new StoreVar(d,n)); :}
-	  |   STORE_ARG INTEIRO:d INTEIRO:n         {: maquina.adionarInstrucao(new StoreArg(d, n)); :}
-	  |   SET_ARG INTEIRO:n                     {: maquina.adionarInstrucao(new SetArg(n)); :}
-      |   CALL INTEIRO:d IDENTIFICADOR:p        {: maquina.adionarInstrucao(new Call(d,new Etiqueta(p))); :}
-	  |   LOCALS INTEIRO:a INTEIRO:v            {: maquina.adionarInstrucao(new Locals(a,v)); :}
+	  |   PUSH_INT INTEIRO:i                    {: maquina.adionarInstrucao(new PushInt(Integer.parseInt(i))); :}
+	  |   PUSH_VAR INTEIRO:d INTEIRO:n          {: maquina.adionarInstrucao(new PushVar(Integer.parseInt(d),Integer.parseInt(n))); :}
+	  |   PUSH_ARG INTEIRO:d INTEIRO:n          {: maquina.adionarInstrucao(new PushArg(Integer.parseInt(d),Integer.parseInt(n))); :}
+	  |   STORE_VAR INTEIRO:d INTEIRO:n         {: maquina.adionarInstrucao(new StoreVar(Integer.parseInt(d),Integer.parseInt(n))); :}
+	  |   STORE_ARG INTEIRO:d INTEIRO:n         {: maquina.adionarInstrucao(new StoreArg(Integer.parseInt(d), Integer.parseInt(n))); :}
+	  |   SET_ARG INTEIRO:n                     {: maquina.adionarInstrucao(new SetArg(Integer.parseInt(n))); :}
+      |   CALL INTEIRO:d IDENTIFICADOR:p        {: maquina.adionarInstrucao(new Call(Integer.parseInt(d),new Etiqueta(p))); :}
+	  |   LOCALS INTEIRO:a INTEIRO:v            {: maquina.adionarInstrucao(new Locals(Integer.parseInt(a),Integer.parseInt(v))); :}
 	  |   RETURN                                {: maquina.adionarInstrucao(new Return()); :}
 	  |   JUMP IDENTIFICADOR:e                  {: maquina.adionarInstrucao(new Jump(new Etiqueta(e))); :}
-	  |   JEQ IDENTIFICADOR:e                   {: maquina.adionarInstrucao(new Jeq(new Etiqueta(e)))); :}
-	  |   JLT IDENTIFICADOR:e                   {: maquina.adionarInstrucao(new Jlt(new Etiqueta(e)))); :}
+	  |   JEQ IDENTIFICADOR:e                   {: maquina.adionarInstrucao(new Jeq(new Etiqueta(e))); :}
+	  |   JLT IDENTIFICADOR:e                   {: maquina.adionarInstrucao(new Jlt(new Etiqueta(e))); :}
 	  |   PRINT                                 {: maquina.adionarInstrucao(new Print()); :}
 	  |   PRINT_STR STRING:s                    {: maquina.adionarInstrucao(new PrintString(s)); :}
 	  |   PRINT_NL                              {: maquina.adionarInstrucao(new PrintNl()); :}

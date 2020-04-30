@@ -6,6 +6,7 @@ import src.aritmeticas.Sub;
 import src.funcoes.Call;
 import src.funcoes.Return;
 import src.funcoes.SetArg;
+import src.saltos.Jump;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -51,8 +52,9 @@ public class TISC {
      */
     public void printMemoriaDeInstrucoes() {
 
-        memoriaDeInstrucoes.forEach(System.out::println);
-
+        for (int i = 0; i < memoriaDeInstrucoes.size(); i++) {
+            System.out.println(i + ": " + memoriaDeInstrucoes.get(i));
+        }
     }
 
     public void printEtiquetas() {
@@ -74,9 +76,12 @@ public class TISC {
         t.adicionarEtiqueta(new Etiqueta("INICIO"));
         t.adionarInstrucao(new Sub());
         t.adionarInstrucao(new SetArg(5));
+        t.adicionarEtiqueta(new Etiqueta("FUNC"));
         t.adionarInstrucao(new Return());
-        t.adionarInstrucao(new Call(5, new Etiqueta("INICIO")));
+        t.adionarInstrucao(new Call(5, new Etiqueta("FUNC")));
+        t.adionarInstrucao(new Jump(new Etiqueta("INICIO")));
 
         t.printMemoriaDeInstrucoes();
+        t.printEtiquetas();
     }
 }

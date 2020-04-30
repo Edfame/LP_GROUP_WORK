@@ -1,12 +1,12 @@
 # alterar para o caminho onde estao os ficheiros
-TOOLS=LP_GROUP_WORK/src
+TOOLS=~/mnt/d/UNIVERSIDADE_STUFF/UNI/bsc/3a/2s/LP/LP_GROUP_WORK
 
 JAVA = java
 JAVAFLAGS =
 JAVAC = javac
 JAVACFLAGS =
 
-JCLASSPATH = .:$(TOOLS):$(TOOLS)/argumentos:$(TOOLS)/aritmeticas:$(TOOLS)/funcoes:$(TOOLS)/inteiros:$(TOOLS)/saida:$(TOOLS)/saltos:$(TOOLS)/variaveis
+JCLASSPATH = .:$(TOOLS):$(TOOLS)/src/:$(TOOLS)/src/argumentos:$(TOOLS)/src/aritmeticas:$(TOOLS)/src/funcoes:$(TOOLS)/src/inteiros:$(TOOLS)/src/saida:$(TOOLS)/src/saltos:$(TOOLS)/src/variaveis
 
 CUP = java -classpath $(JCLASSPATH) java_cup/Main
 CUPFLAGS =
@@ -15,15 +15,14 @@ JLEX = java -classpath $(JCLASSPATH) JLex/Main
 JLEXFLAGS =
 
 CLASSES = parser.class Yylex.class \
-			src/Main.class src/TISC.class src/Etiqueta.class src/Instrucao.class\
-			src/argumentos/PushArg.class src/argumentos/StoreArg.class \
-			src/aritmeticas/Add.class src/aritmeticas/Div.class src/aritmeticas/Exp.class src/aritmeticas/Mod.class src/aritmeticas/Mult.class src/aritmeticas/Sub.class \
-			src/funcoes/Call.class src/funcoes/Locals.class src/funcoes/Return.class src/funcoes/SetArg.class \
-			src/inteiros/PushInt.class \
-			src/saida/Print.class src/saida/PrintNl.class src/saida/PrintString.class \
-			src/saltos/Jeq.class src/saltos/Jlt.class src/saltos/Jump.class \
-			src/variaveis/PushVar.class src/variaveis/StoreVar.class
-	  		# etc ...
+	  src.Main.class src.TISC.class src.Etiqueta src.Instrucao\
+	  src.argumentos.PushArg.class src.argumentos.StoreArg.class \
+	  src.aritmeticas.Add.class src.aritmeticas.Div.class src.aritmeticas.Exp.class src.aritmeticas.Mod.class src.aritmeticas.Mult.class src.aritmeticas.Sub.class \
+      src.funcoes.Call.class src.funcoes.Locals.class src.funcoes.Return.class src.funcoes.SetArg.class \
+      src.inteiros.PushInt.class \
+      src.saida.Print.class src.saida.PrintNl.class src.saida.PrintString.class \
+      src.saltos.Jeq.class src.saltos.Jlt.class src.saltos.Jump.class \
+      src.variaveis.PushVar.class src.variaveis.StoreVar.class
 
 INTERMEDIATE_FILES = registos.lex.java sym.java parser.java Yylex.java
 

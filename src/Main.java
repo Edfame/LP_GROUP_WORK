@@ -5,14 +5,14 @@ public class Main {
   public static void main(String args[])
     throws Exception
   {
-    /*parser aParser = new parser();
+    parser aParser = new parser();
     TISC maquina;
 
     // carrega o programa TISC
-    maquina = (TISC) aParser.parse().value;
+    maquina = (TISC) aParser.parser().value;
 
     // e executa-o
     if (maquina != null)
-      maquina.executa();*/
+      maquina.executa();
   }
 }
