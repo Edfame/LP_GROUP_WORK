@@ -1,5 +1,5 @@
 # alterar para o caminho onde estao os ficheiros
-TOOLS=LP_GROUP_WORK/src
+TOOLS=src
 
 JAVA = java
 JAVAFLAGS =
@@ -9,12 +9,12 @@ JAVACFLAGS =
 JCLASSPATH = .:$(TOOLS):$(TOOLS)/argumentos:$(TOOLS)/aritmeticas:$(TOOLS)/funcoes:$(TOOLS)/inteiros:$(TOOLS)/saida:$(TOOLS)/saltos:$(TOOLS)/variaveis
 
 CUP = java -classpath $(JCLASSPATH) java_cup/Main
-CUPFLAGS =
+CUPFLAGS = -package src -destdir src
 
 JLEX = java -classpath $(JCLASSPATH) JLex/Main
 JLEXFLAGS =
 
-CLASSES = parser.class Yylex.class \
+CLASSES = src/parser.class src/Yylex.class \
 			src/Main.class src/TISC.class src/Etiqueta.class src/Instrucao.class\
 			src/argumentos/PushArg.class src/argumentos/StoreArg.class \
 			src/aritmeticas/Add.class src/aritmeticas/Div.class src/aritmeticas/Exp.class src/aritmeticas/Mod.class src/aritmeticas/Mult.class src/aritmeticas/Sub.class \
@@ -25,10 +25,10 @@ CLASSES = parser.class Yylex.class \
 			src/variaveis/PushVar.class src/variaveis/StoreVar.class
 	  		# etc ...
 
-INTERMEDIATE_FILES = registos.lex.java sym.java parser.java Yylex.java
+INTERMEDIATE_FILES = src/registos.lex.java src/sym.java src/parser.java src/Yylex.java
 
-.INTERMEDIATE: sym.java
-.SECONDARY: registos.lex.java Yylex.java
+.INTERMEDIATE: src/sym.java
+.SECONDARY: src/registos.lex.java src/Yylex.java
 
 .PHONY: all clean run
 
@@ -37,29 +37,30 @@ INTERMEDIATE_FILES = registos.lex.java sym.java parser.java Yylex.java
 
 all: $(CLASSES)
 
-Main.class: Main.java TISC.class parser.class
+src/Main.class: src/Main.java src/TISC.class src/parser.class
 
-parser.java sym.java: registos.cup
+src/parser.java src/sym.java: src/registos.cup
 	$(CUP) $(CUPFLAGS) $<
 	@[ -s $@ ] || { rm -f $@; exit 1; }
 
-parser.class: parser.java Yylex.class
+src/parser.class: src/parser.java src/Yylex.class
 	CLASSPATH=$(JCLASSPATH) $(JAVAC) $(JAVACFLAGS) $<
 
-sym.class: sym.java
+src/sym.class: src/sym.java
 
-registos.lex.java: registos.lex
+src/registos.lex.java: src/registos.lex
 	$(JLEX) $(JLEXFLAGS) $<
 
-Yylex.java:
+src/Yylex.java: src/registos.lex.java
 	ln -sf registos.lex.java $@
 
-Yylex.class: Yylex.java registos.lex.java sym.class
+src/Yylex.class: src/Yylex.java src/registos.lex.java src/sym.class
 	CLASSPATH=$(JCLASSPATH) $(JAVAC) $(JAVACFLAGS) $<
 
 clean:
 	$(RM) $(INTERMEDIATE_FILES)
-	$(RM) *.class *~
+	$(RM) src/*.class *~
+	$(RM) $(CLASSES)
 
 run:
-	CLASSPATH=$(JCLASSPATH) $(JAVA) $(JAVAFLAGS) Main
+	CLASSPATH=$(JCLASSPATH) $(JAVA) $(JAVAFLAGS) src.Main

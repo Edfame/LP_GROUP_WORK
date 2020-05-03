@@ -1,21 +1,14 @@
 package src;
-// Tiny Instruction Set Computer
-
-import src.aritmeticas.Add;
-import src.aritmeticas.Sub;
-import src.funcoes.Call;
-import src.funcoes.Return;
-import src.funcoes.SetArg;
-import src.saltos.Jump;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
 
+// Tiny Instruction Set Computer
 public class TISC {
 
     private ArrayList<Instrucao> memoriaDeInstrucoes;
     private Hashtable<Etiqueta, Integer> etiquetas;
-    private int numberOfInstructions;
+    private int numeroDeInstrucoes;
 
     /*
      * Cria um novo objeto da máquina TISC.
@@ -24,7 +17,7 @@ public class TISC {
 
         memoriaDeInstrucoes = new ArrayList<>();
         etiquetas = new Hashtable<>();
-        numberOfInstructions = 0;
+        numeroDeInstrucoes = 0;
 
     }
 
@@ -34,7 +27,7 @@ public class TISC {
     public void adionarInstrucao(Instrucao novaInstrucao) {
 
         memoriaDeInstrucoes.add(novaInstrucao);
-        numberOfInstructions++;
+        numeroDeInstrucoes++;
 
     }
 
@@ -43,7 +36,7 @@ public class TISC {
      */
     public void adicionarEtiqueta(Etiqueta novaEtiqueta) {
 
-        etiquetas.put(novaEtiqueta, numberOfInstructions);
+        etiquetas.put(novaEtiqueta, numeroDeInstrucoes);
 
     }
 
@@ -65,23 +58,8 @@ public class TISC {
     /** Executa o programa src.TISC carregado na maquina. */
     public void executa() {
 
+        printMemoriaDeInstrucoes();
+        printEtiquetas();
         //TODO ler o programa da memória e executá-lo.
-    }
-
-    public static void main(String[] args) {
-
-        TISC t = new TISC();
-
-        t.adionarInstrucao(new Add());
-        t.adicionarEtiqueta(new Etiqueta("INICIO"));
-        t.adionarInstrucao(new Sub());
-        t.adionarInstrucao(new SetArg(5));
-        t.adicionarEtiqueta(new Etiqueta("FUNC"));
-        t.adionarInstrucao(new Return());
-        t.adionarInstrucao(new Call(5, new Etiqueta("FUNC")));
-        t.adionarInstrucao(new Jump(new Etiqueta("INICIO")));
-
-        t.printMemoriaDeInstrucoes();
-        t.printEtiquetas();
     }
 }

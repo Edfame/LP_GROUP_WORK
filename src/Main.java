@@ -9,7 +9,7 @@ public class Main {
     TISC maquina;
 
     // carrega o programa TISC
-    maquina = (TISC) aParser.parser().value;
+    maquina = (TISC) aParser.parse().value;
 
     // e executa-o
     if (maquina != null)
