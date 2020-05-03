@@ -25,7 +25,7 @@ CLASSES = src/parser.class src/Yylex.class \
 			src/variaveis/PushVar.class src/variaveis/StoreVar.class
 	  		# etc ...
 
-INTERMEDIATE_FILES = src/registos.lex.java src/sym.java src/parser.java src/Yylex.java
+INTERMEDIATE_FILES = registos.lex.java src/sym.java src/parser.java src/Yylex.java
 
 .INTERMEDIATE: src/sym.java
 .SECONDARY: src/registos.lex.java src/Yylex.java
