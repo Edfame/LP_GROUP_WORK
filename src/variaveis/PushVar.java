@@ -1,5 +1,6 @@
 package src.variaveis;
 
+import src.Controlo;
 import src.Instrucao;
 
 public class PushVar extends Instrucao {
@@ -23,7 +24,7 @@ public class PushVar extends Instrucao {
     }
 
     @Override
-    public void executar() {
+    public void executar(Controlo controlo) {
 
     }
 

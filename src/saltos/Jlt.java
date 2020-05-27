@@ -1,5 +1,6 @@
 package src.saltos;
 
+import src.Controlo;
 import src.Etiqueta;
 import src.Instrucao;
 
@@ -18,7 +19,16 @@ public class Jlt extends Instrucao {
     }
 
     @Override
-    public void executar() {
+    public void executar(Controlo controlo) {
+
+        int a = controlo.getPilhaDeAvaliacao().pop();
+        int b = controlo.getPilhaDeAvaliacao().pop();
+
+        if (a > b) {
+
+            controlo.setPc(etiqueta.getPosicao());
+
+        }
 
     }
 

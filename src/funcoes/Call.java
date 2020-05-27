@@ -1,5 +1,6 @@
 package src.funcoes;
 
+import src.Controlo;
 import src.Etiqueta;
 import src.Instrucao;
 
@@ -24,7 +25,7 @@ public class Call extends Instrucao {
     }
 
     @Override
-    public void executar() {
+    public void executar(Controlo controlo) {
 
     }
 

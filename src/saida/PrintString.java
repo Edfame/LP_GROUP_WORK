@@ -1,5 +1,6 @@
 package src.saida;
 
+import src.Controlo;
 import src.Instrucao;
 
 public class PrintString extends Instrucao {
@@ -17,7 +18,9 @@ public class PrintString extends Instrucao {
     }
 
     @Override
-    public void executar() {
+    public void executar(Controlo controlo) {
+
+        System.out.print(string);
 
     }
 

@@ -2,6 +2,7 @@ package src;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.Stack;
 
 // Tiny Instruction Set Computer
 public class TISC {
@@ -9,6 +10,7 @@ public class TISC {
     private ArrayList<Instrucao> memoriaDeInstrucoes;
     private Hashtable<Etiqueta, Integer> etiquetas;
     private int numeroDeInstrucoes;
+    private Controlo controlo;
 
     /*
      * Cria um novo objeto da máquina TISC.
@@ -18,6 +20,7 @@ public class TISC {
         memoriaDeInstrucoes = new ArrayList<>();
         etiquetas = new Hashtable<>();
         numeroDeInstrucoes = 0;
+        controlo = new Controlo();
 
     }
 
@@ -37,6 +40,7 @@ public class TISC {
     public void adicionarEtiqueta(Etiqueta novaEtiqueta) {
 
         etiquetas.put(novaEtiqueta, numeroDeInstrucoes);
+        novaEtiqueta.setPosicao(numeroDeInstrucoes);
 
     }
 
@@ -58,8 +62,14 @@ public class TISC {
     /** Executa o programa src.TISC carregado na maquina. */
     public void executa() {
 
-        printMemoriaDeInstrucoes();
-        printEtiquetas();
-        //TODO ler o programa da memória e executá-lo.
+//        printMemoriaDeInstrucoes();
+//        printEtiquetas();
+//        //TODO ler o programa da memória e executá-lo.
+
+        for (Instrucao inst: memoriaDeInstrucoes) {
+
+            inst.executar(controlo);
+
+        }
     }
 }

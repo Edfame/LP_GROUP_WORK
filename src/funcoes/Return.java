@@ -1,5 +1,6 @@
 package src.funcoes;
 
+import src.Controlo;
 import src.Instrucao;
 
 public class Return extends Instrucao {
@@ -9,7 +10,7 @@ public class Return extends Instrucao {
     }
 
     @Override
-    public void executar() {
+    public void executar(Controlo controlo) {
 
     }
 

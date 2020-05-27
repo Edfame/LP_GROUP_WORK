@@ -1,5 +1,6 @@
 package src.inteiros;
 
+import src.Controlo;
 import src.Instrucao;
 
 public class PushInt extends Instrucao {
@@ -17,7 +18,9 @@ public class PushInt extends Instrucao {
     }
 
     @Override
-    public void executar() {
+    public void executar(Controlo controlo) {
+
+        controlo.getPilhaDeAvaliacao().push(inteiro);
 
     }
 
