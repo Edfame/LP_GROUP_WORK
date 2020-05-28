@@ -7,11 +7,15 @@ import java.util.Stack;
 // Tiny Instruction Set Computer
 public class TISC {
 
+    //Variaveis da máquina com as quais as instruções interegem.
     private ArrayList<Instrucao> memoriaDeInstrucoes;
     private ArrayList<Integer> memoriaDeExecucao;
     private Stack<Integer> pilhaDeAvaliacao;
     private Hashtable<Etiqueta, Integer> etiquetas;
     private int numeroDeInstrucoes, pc, evp;
+
+    //Espaço ocupado pelo Control Link, Access Link, Endereço de Retorno, Argumentos e Variávies.
+    public final int CL_AL_ER_A_V = 5;
 
     /*
      * Cria um novo objeto da máquina TISC.
@@ -63,8 +67,8 @@ public class TISC {
     }
 
     /*
-    * Instruções
-    * */
+     * Instruções
+     * */
 
     public void pushArg(int distancia, int numero) {
 
@@ -148,7 +152,31 @@ public class TISC {
     public void call(int distancia, Etiqueta etiqueta) {
     }
 
+    //TODO review
     public void locals(int argumentos, int variaveis) {
+
+        if (evp == -1) {
+
+            evp++;
+
+            for (int i = 0; i < CL_AL_ER_A_V + argumentos + variaveis; i++) {
+                memoriaDeExecucao.add(null);
+            }
+
+        } else {
+
+            int alAtual = memoriaDeExecucao.get(evp + 1),
+                numeroArgumentosAtual = memoriaDeExecucao.get(evp + 3),
+                numeroVariaveisAtual = memoriaDeExecucao.get(evp + 4);
+
+            memoriaDeExecucao.add(evp);
+
+            evp = evp + CL_AL_ER_A_V + numeroArgumentosAtual + numeroVariaveisAtual;
+
+            for (int i = 0; i < CL_AL_ER_A_V - 1 + argumentos + variaveis; i++) {
+                memoriaDeExecucao.add(null);
+            }
+        }
     }
 
     /**
