@@ -1,8 +1,8 @@
 package src.saltos;
 
-import src.Controlo;
 import src.Etiqueta;
 import src.Instrucao;
+import src.TISC;
 
 public class Jlt extends Instrucao {
 
@@ -19,14 +19,14 @@ public class Jlt extends Instrucao {
     }
 
     @Override
-    public void executar(Controlo controlo) {
+    public void executar(TISC tisc) {
 
-        int a = controlo.getPilhaDeAvaliacao().pop();
-        int b = controlo.getPilhaDeAvaliacao().pop();
+        int a = tisc.getPilhaDeAvaliacao().pop();
+        int b = tisc.getPilhaDeAvaliacao().pop();
 
         if (a > b) {
 
-            controlo.setPc(etiqueta.getPosicao());
+            tisc.setPc(tisc.getEtiquetas().get(etiqueta));
 
         }
 

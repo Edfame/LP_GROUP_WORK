@@ -1,10 +1,7 @@
 package src.funcoes;
 
-import src.Controlo;
 import src.Instrucao;
-
-import java.util.ArrayList;
-import java.util.Stack;
+import src.TISC;
 
 public class Locals extends Instrucao {
 
@@ -25,31 +22,31 @@ public class Locals extends Instrucao {
         return argumentos;
     }
 
-    private void adicionarRA(Controlo controlo) {
+    private void adicionarRA(TISC tisc) {
 
-        controlo.getMemoriaDeExecucao().add(controlo.getEvp());
-        controlo.getMemoriaDeExecucao().add(null);
-        controlo.getMemoriaDeExecucao().add(null);
+        tisc.getMemoriaDeExecucao().add(tisc.getEvp());
+        tisc.getMemoriaDeExecucao().add(null);
+        tisc.getMemoriaDeExecucao().add(null);
 
         for (int i = 0; i < argumentos + variaveis; i++) {
 
-            controlo.getMemoriaDeExecucao().add(null);
+            tisc.getMemoriaDeExecucao().add(null);
         }
     }
 
     @Override
-    public void executar(Controlo controlo) {
+    public void executar(TISC tisc) {
 
-        if (controlo.getEvp() == -1) {
+        if (tisc.getEvp() == -1) {
 
-            adicionarRA(controlo);
-            controlo.setEvp(0);
+            adicionarRA(tisc);
+            tisc.setEvp(0);
 
         } else {
 
-            int newEvp = controlo.getMemoriaDeExecucao().size();
-            adicionarRA(controlo);
-            controlo.setEvp(newEvp);
+            int newEvp = tisc.getMemoriaDeExecucao().size();
+            adicionarRA(tisc);
+            tisc.setEvp(newEvp);
         }
     }
 

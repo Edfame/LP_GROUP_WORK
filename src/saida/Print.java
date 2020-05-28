@@ -1,7 +1,7 @@
 package src.saida;
 
-import src.Controlo;
 import src.Instrucao;
+import src.TISC;
 
 public class Print extends Instrucao {
 
@@ -10,9 +10,9 @@ public class Print extends Instrucao {
     }
 
     @Override
-    public void executar(Controlo controlo) {
+    public void executar(TISC tisc) {
 
-        System.out.print(controlo.getPilhaDeAvaliacao().pop());
+        System.out.print(tisc.getPilhaDeAvaliacao().pop());
 
     }
 

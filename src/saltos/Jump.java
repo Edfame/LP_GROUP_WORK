@@ -1,8 +1,8 @@
 package src.saltos;
 
-import src.Controlo;
 import src.Etiqueta;
 import src.Instrucao;
+import src.TISC;
 
 public class Jump extends Instrucao {
 
@@ -18,9 +18,9 @@ public class Jump extends Instrucao {
     }
 
     @Override
-    public void executar(Controlo controlo) {
+    public void executar(TISC tisc) {
 
-        controlo.setPc(etiqueta.getPosicao());
+        tisc.setPc(tisc.getEtiquetas().get(etiqueta));
 
     }
 

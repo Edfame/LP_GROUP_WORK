@@ -3,7 +3,6 @@ package src;
 public class Etiqueta {
 
     private String etiqueta;
-    private int posicao;
 
     public Etiqueta(String etiqueta) {
 
@@ -13,14 +12,6 @@ public class Etiqueta {
 
     public String getEtiqueta() {
         return etiqueta;
-    }
-
-    public int getPosicao() {
-        return posicao;
-    }
-
-    public void setPosicao(int posicao) {
-        this.posicao = posicao;
     }
 
     @Override

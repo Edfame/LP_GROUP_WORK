@@ -1,10 +1,7 @@
 package src.argumentos;
 
-import src.Controlo;
 import src.Instrucao;
-
-import java.util.ArrayList;
-import java.util.Stack;
+import src.TISC;
 
 public class PushArg extends Instrucao {
 
@@ -27,7 +24,7 @@ public class PushArg extends Instrucao {
     }
 
     @Override
-    public void executar(Controlo controlo) {
+    public void executar(TISC tisc) {
 
     }
 

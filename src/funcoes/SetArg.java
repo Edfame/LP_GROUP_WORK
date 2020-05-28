@@ -1,7 +1,7 @@
 package src.funcoes;
 
-import src.Controlo;
 import src.Instrucao;
+import src.TISC;
 
 public class SetArg extends Instrucao {
 
@@ -18,7 +18,7 @@ public class SetArg extends Instrucao {
     }
 
     @Override
-    public void executar(Controlo controlo) {
+    public void executar(TISC tisc) {
 
     }
 

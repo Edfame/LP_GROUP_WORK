@@ -1,8 +1,8 @@
 package src.funcoes;
 
-import src.Controlo;
 import src.Etiqueta;
 import src.Instrucao;
+import src.TISC;
 
 public class Call extends Instrucao {
 
@@ -25,7 +25,7 @@ public class Call extends Instrucao {
     }
 
     @Override
-    public void executar(Controlo controlo) {
+    public void executar(TISC tisc) {
 
     }
 

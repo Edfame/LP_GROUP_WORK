@@ -1,10 +1,7 @@
 package src.aritmeticas;
 
-import src.Controlo;
 import src.Instrucao;
-
-import java.util.ArrayList;
-import java.util.Stack;
+import src.TISC;
 
 public class Exp extends Instrucao {
 
@@ -13,12 +10,12 @@ public class Exp extends Instrucao {
     }
 
     @Override
-    public void executar(Controlo controlo) {
+    public void executar(TISC tisc) {
 
-        int direita = controlo.getPilhaDeAvaliacao().pop();
-        int esquerda = controlo.getPilhaDeAvaliacao().pop();
+        int direita = tisc.getPilhaDeAvaliacao().pop();
+        int esquerda = tisc.getPilhaDeAvaliacao().pop();
 
-        controlo.getPilhaDeAvaliacao().push((int) Math.pow(esquerda, direita));
+        tisc.getPilhaDeAvaliacao().push((int) Math.pow(esquerda, direita));
 
     }
 

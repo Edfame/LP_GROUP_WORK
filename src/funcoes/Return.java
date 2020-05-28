@@ -1,7 +1,7 @@
 package src.funcoes;
 
-import src.Controlo;
 import src.Instrucao;
+import src.TISC;
 
 public class Return extends Instrucao {
 
@@ -10,7 +10,7 @@ public class Return extends Instrucao {
     }
 
     @Override
-    public void executar(Controlo controlo) {
+    public void executar(TISC tisc) {
 
     }
 

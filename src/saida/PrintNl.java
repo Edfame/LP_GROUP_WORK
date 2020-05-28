@@ -1,7 +1,7 @@
 package src.saida;
 
-import src.Controlo;
 import src.Instrucao;
+import src.TISC;
 
 public class PrintNl extends Instrucao {
 
@@ -10,7 +10,7 @@ public class PrintNl extends Instrucao {
     }
 
     @Override
-    public void executar(Controlo controlo) {
+    public void executar(TISC tisc) {
 
         System.out.println();
 

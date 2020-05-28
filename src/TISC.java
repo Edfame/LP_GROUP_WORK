@@ -8,9 +8,10 @@ import java.util.Stack;
 public class TISC {
 
     private ArrayList<Instrucao> memoriaDeInstrucoes;
+    private ArrayList<Integer> memoriaDeExecucao;
+    private Stack<Integer> pilhaDeAvaliacao;
     private Hashtable<Etiqueta, Integer> etiquetas;
-    private int numeroDeInstrucoes;
-    private Controlo controlo;
+    private int numeroDeInstrucoes, pc, evp;
 
     /*
      * Cria um novo objeto da máquina TISC.
@@ -20,8 +21,51 @@ public class TISC {
         memoriaDeInstrucoes = new ArrayList<>();
         etiquetas = new Hashtable<>();
         numeroDeInstrucoes = 0;
-        controlo = new Controlo();
+        memoriaDeExecucao = new ArrayList<>();
+        pilhaDeAvaliacao = new Stack<>();
+        pc = 0;
+        evp = -1;
 
+    }
+
+    public ArrayList<Integer> getMemoriaDeExecucao() {
+        return memoriaDeExecucao;
+    }
+
+    public void setMemoriaDeExecucao(ArrayList<Integer> memoriaDeExecucao) {
+        this.memoriaDeExecucao = memoriaDeExecucao;
+    }
+
+    public Stack<Integer> getPilhaDeAvaliacao() {
+        return pilhaDeAvaliacao;
+    }
+
+    public void setPilhaDeAvaliacao(Stack<Integer> pilhaDeAvaliacao) {
+        this.pilhaDeAvaliacao = pilhaDeAvaliacao;
+    }
+
+    public Hashtable<Etiqueta, Integer> getEtiquetas() {
+        return etiquetas;
+    }
+
+    public void setEtiquetas(Hashtable<Etiqueta, Integer> etiquetas) {
+        this.etiquetas = etiquetas;
+    }
+
+    public int getPc() {
+        return pc;
+    }
+
+    public void setPc(int pc) {
+        this.pc = pc;
+    }
+
+    public int getEvp() {
+        return evp;
+    }
+
+    public void setEvp(int evp) {
+        this.evp = evp;
     }
 
     /*
@@ -40,7 +84,6 @@ public class TISC {
     public void adicionarEtiqueta(Etiqueta novaEtiqueta) {
 
         etiquetas.put(novaEtiqueta, numeroDeInstrucoes);
-        novaEtiqueta.setPosicao(numeroDeInstrucoes);
 
     }
 
@@ -68,8 +111,9 @@ public class TISC {
 
         for (Instrucao inst: memoriaDeInstrucoes) {
 
-            inst.executar(controlo);
+            inst.executar(this);
 
         }
     }
+
 }

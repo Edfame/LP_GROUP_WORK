@@ -1,7 +1,7 @@
 package src.variaveis;
 
-import src.Controlo;
 import src.Instrucao;
+import src.TISC;
 
 public class StoreVar extends Instrucao {
 
@@ -24,7 +24,7 @@ public class StoreVar extends Instrucao {
     }
 
     @Override
-    public void executar(Controlo controlo) {
+    public void executar(TISC tisc) {
 
     }
 

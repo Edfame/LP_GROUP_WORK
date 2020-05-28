@@ -1,7 +1,7 @@
 package src.aritmeticas;
 
-import src.Controlo;
 import src.Instrucao;
+import src.TISC;
 
 public class Mult extends Instrucao {
 
@@ -10,12 +10,12 @@ public class Mult extends Instrucao {
     }
 
     @Override
-    public void executar(Controlo controlo) {
+    public void executar(TISC tisc) {
 
-        int direita = controlo.getPilhaDeAvaliacao().pop();
-        int esquerda = controlo.getPilhaDeAvaliacao().pop();
+        int direita = tisc.getPilhaDeAvaliacao().pop();
+        int esquerda = tisc.getPilhaDeAvaliacao().pop();
 
-        controlo.getPilhaDeAvaliacao().push(direita * esquerda);
+        tisc.getPilhaDeAvaliacao().push(direita * esquerda);
 
     }
 
