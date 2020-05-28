@@ -19,53 +19,13 @@ public class TISC {
     public TISC() {
 
         memoriaDeInstrucoes = new ArrayList<>();
-        etiquetas = new Hashtable<>();
-        numeroDeInstrucoes = 0;
         memoriaDeExecucao = new ArrayList<>();
         pilhaDeAvaliacao = new Stack<>();
+        etiquetas = new Hashtable<>();
+        numeroDeInstrucoes = 0;
         pc = 0;
         evp = -1;
 
-    }
-
-    public ArrayList<Integer> getMemoriaDeExecucao() {
-        return memoriaDeExecucao;
-    }
-
-    public void setMemoriaDeExecucao(ArrayList<Integer> memoriaDeExecucao) {
-        this.memoriaDeExecucao = memoriaDeExecucao;
-    }
-
-    public Stack<Integer> getPilhaDeAvaliacao() {
-        return pilhaDeAvaliacao;
-    }
-
-    public void setPilhaDeAvaliacao(Stack<Integer> pilhaDeAvaliacao) {
-        this.pilhaDeAvaliacao = pilhaDeAvaliacao;
-    }
-
-    public Hashtable<Etiqueta, Integer> getEtiquetas() {
-        return etiquetas;
-    }
-
-    public void setEtiquetas(Hashtable<Etiqueta, Integer> etiquetas) {
-        this.etiquetas = etiquetas;
-    }
-
-    public int getPc() {
-        return pc;
-    }
-
-    public void setPc(int pc) {
-        this.pc = pc;
-    }
-
-    public int getEvp() {
-        return evp;
-    }
-
-    public void setEvp(int evp) {
-        this.evp = evp;
     }
 
     /*
@@ -102,18 +62,146 @@ public class TISC {
         System.out.println(etiquetas.toString());
     }
 
-    /** Executa o programa src.TISC carregado na maquina. */
-    public void executa() {
+    /*
+    * Instruções
+    * */
 
-//        printMemoriaDeInstrucoes();
-//        printEtiquetas();
-//        //TODO ler o programa da memória e executá-lo.
+    public void pushArg(int distancia, int numero) {
 
-        for (Instrucao inst: memoriaDeInstrucoes) {
+    }
 
-            inst.executar(this);
+    public void storeArg(int distancia, int numero) {
+    }
+
+    public void add() {
+
+        int direita = pilhaDeAvaliacao.pop();
+        int esquerda = pilhaDeAvaliacao.pop();
+
+        pilhaDeAvaliacao.push(direita + esquerda);
+    }
+
+    public void div() {
+
+        int direita = pilhaDeAvaliacao.pop();
+        int esquerda = pilhaDeAvaliacao.pop();
+
+        pilhaDeAvaliacao.push(esquerda / direita);
+    }
+
+    public void exp() {
+
+        int direita = pilhaDeAvaliacao.pop();
+        int esquerda = pilhaDeAvaliacao.pop();
+
+        pilhaDeAvaliacao.push((int) Math.pow(esquerda, direita));
+    }
+
+    public void mod() {
+
+        int direita = pilhaDeAvaliacao.pop();
+        int esquerda = pilhaDeAvaliacao.pop();
+
+        pilhaDeAvaliacao.push(esquerda % direita);
+    }
+
+    public void mult() {
+
+        int direita = pilhaDeAvaliacao.pop();
+        int esquerda = pilhaDeAvaliacao.pop();
+
+        pilhaDeAvaliacao.push(direita * esquerda);
+    }
+
+    public void sub() {
+
+        int direita = pilhaDeAvaliacao.pop();
+        int esquerda = pilhaDeAvaliacao.pop();
+
+        pilhaDeAvaliacao.push(esquerda - direita);
+    }
+
+    public void call(int distancia, Etiqueta etiqueta) {
+    }
+
+    public void locals(int argumentos, int variaveis) {
+    }
+
+    public void returnInst() {
+    }
+
+    public void setArg(int numero) {
+    }
+
+    public void pushInt(int inteiro) {
+
+        pilhaDeAvaliacao.push(inteiro);
+    }
+
+    public void print() {
+
+        System.out.print(pilhaDeAvaliacao.pop());
+    }
+
+    public void printNl() {
+
+        System.out.print("\n");
+    }
+
+    public void printString(String string) {
+
+        System.out.print(string);
+    }
+
+    public void jeq(Etiqueta etiqueta) {
+
+        int a = pilhaDeAvaliacao.pop();
+        int b = pilhaDeAvaliacao.pop();
+
+        if (a == b) {
+
+            pc = etiquetas.get(etiqueta);
 
         }
     }
 
+    public void jlt(Etiqueta etiqueta) {
+
+        int a = pilhaDeAvaliacao.pop();
+        int b = pilhaDeAvaliacao.pop();
+
+        if (a > b) {
+
+            pc = etiquetas.get(etiqueta);
+
+        }
+    }
+
+    public void jump(Etiqueta etiqueta) {
+
+        pc = etiquetas.get(etiqueta);
+
+    }
+
+    public void pushVar(int distancia, int numero) {
+    }
+
+    public void storeVar(int distancia, int numero) {
+    }
+
+    /**
+     * Executa o programa src.TISC carregado na maquina.
+     */
+    public void executa() {
+
+        printMemoriaDeInstrucoes();
+        printEtiquetas();
+
+        //TODO ler o programa da memória e executá-lo.
+        while (this.pc < memoriaDeInstrucoes.size()) {
+
+            memoriaDeInstrucoes.get(pc).executar(this);
+            pc++;
+        }
+    }
 }

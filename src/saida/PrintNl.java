@@ -12,7 +12,7 @@ public class PrintNl extends Instrucao {
     @Override
     public void executar(TISC tisc) {
 
-        System.out.println();
+        tisc.printNl();
 
     }
 

@@ -12,10 +12,7 @@ public class Exp extends Instrucao {
     @Override
     public void executar(TISC tisc) {
 
-        int direita = tisc.getPilhaDeAvaliacao().pop();
-        int esquerda = tisc.getPilhaDeAvaliacao().pop();
-
-        tisc.getPilhaDeAvaliacao().push((int) Math.pow(esquerda, direita));
+        tisc.exp();
 
     }
 

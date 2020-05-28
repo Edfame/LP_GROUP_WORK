@@ -20,7 +20,7 @@ public class Jump extends Instrucao {
     @Override
     public void executar(TISC tisc) {
 
-        tisc.setPc(tisc.getEtiquetas().get(etiqueta));
+        tisc.jump(etiqueta);
 
     }
 

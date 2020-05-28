@@ -12,7 +12,7 @@ public class Print extends Instrucao {
     @Override
     public void executar(TISC tisc) {
 
-        System.out.print(tisc.getPilhaDeAvaliacao().pop());
+        tisc.print();
 
     }
 

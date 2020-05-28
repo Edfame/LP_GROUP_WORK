@@ -26,6 +26,8 @@ public class PushArg extends Instrucao {
     @Override
     public void executar(TISC tisc) {
 
+        tisc.pushArg(distancia, numero);
+
     }
 
     @Override

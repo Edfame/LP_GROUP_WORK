@@ -20,7 +20,7 @@ public class PrintString extends Instrucao {
     @Override
     public void executar(TISC tisc) {
 
-        System.out.print(string);
+        tisc.printString(string);
 
     }
 

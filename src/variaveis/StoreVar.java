@@ -26,6 +26,8 @@ public class StoreVar extends Instrucao {
     @Override
     public void executar(TISC tisc) {
 
+        tisc.storeVar(distancia, numero);
+
     }
 
     @Override

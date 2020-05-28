@@ -26,6 +26,8 @@ public class PushVar extends Instrucao {
     @Override
     public void executar(TISC tisc) {
 
+        tisc.pushVar(distancia, numero);
+
     }
 
     @Override

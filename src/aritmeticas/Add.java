@@ -12,10 +12,7 @@ public class Add extends Instrucao {
     @Override
     public void executar(TISC tisc) {
 
-        int direita = tisc.getPilhaDeAvaliacao().pop();
-        int esquerda = tisc.getPilhaDeAvaliacao().pop();
-
-        tisc.getPilhaDeAvaliacao().push(direita + esquerda);
+        tisc.add();
 
     }
 

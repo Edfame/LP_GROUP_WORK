@@ -20,7 +20,7 @@ public class PushInt extends Instrucao {
     @Override
     public void executar(TISC tisc) {
 
-        tisc.getPilhaDeAvaliacao().push(inteiro);
+        tisc.pushInt(inteiro);
 
     }
 

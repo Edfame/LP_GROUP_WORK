@@ -27,6 +27,8 @@ public class Call extends Instrucao {
     @Override
     public void executar(TISC tisc) {
 
+        tisc.call(distancia, etiqueta);
+
     }
 
     @Override

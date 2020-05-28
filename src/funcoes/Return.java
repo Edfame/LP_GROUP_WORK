@@ -12,6 +12,8 @@ public class Return extends Instrucao {
     @Override
     public void executar(TISC tisc) {
 
+        tisc.returnInst();
+
     }
 
     @Override

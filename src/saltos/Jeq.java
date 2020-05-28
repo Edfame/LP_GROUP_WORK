@@ -21,14 +21,7 @@ public class Jeq extends Instrucao {
     @Override
     public void executar(TISC tisc) {
 
-        int a = tisc.getPilhaDeAvaliacao().pop();
-        int b = tisc.getPilhaDeAvaliacao().pop();
-
-        if (a == b) {
-
-            tisc.setPc(tisc.getEtiquetas().get(etiqueta));
-
-        }
+        tisc.jeq(etiqueta);
     }
 
     @Override

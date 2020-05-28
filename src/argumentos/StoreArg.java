@@ -26,6 +26,8 @@ public class StoreArg extends Instrucao {
     @Override
     public void executar(TISC tisc) {
 
+        tisc.storeArg(distancia, numero);
+
     }
 
     @Override

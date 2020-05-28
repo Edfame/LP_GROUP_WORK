@@ -12,10 +12,7 @@ public class Div extends Instrucao {
     @Override
     public void executar(TISC tisc) {
 
-        int direita = tisc.getPilhaDeAvaliacao().pop();
-        int esquerda = tisc.getPilhaDeAvaliacao().pop();
-
-        tisc.getPilhaDeAvaliacao().push(esquerda / direita);
+        tisc.div();
 
     }
 

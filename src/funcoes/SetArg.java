@@ -20,6 +20,8 @@ public class SetArg extends Instrucao {
     @Override
     public void executar(TISC tisc) {
 
+        tisc.setArg(numero);
+
     }
 
     @Override

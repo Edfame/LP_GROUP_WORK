@@ -21,14 +21,7 @@ public class Jlt extends Instrucao {
     @Override
     public void executar(TISC tisc) {
 
-        int a = tisc.getPilhaDeAvaliacao().pop();
-        int b = tisc.getPilhaDeAvaliacao().pop();
-
-        if (a > b) {
-
-            tisc.setPc(tisc.getEtiquetas().get(etiqueta));
-
-        }
+        tisc.jlt(etiqueta);
 
     }
 
