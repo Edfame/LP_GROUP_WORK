@@ -74,9 +74,29 @@ public class TISC {
      */
     public void pushArg(int distancia, int numero) {
 
+        int al = memoriaDeExecucao.get(evp + 1);
+
+        for (int i = distancia; i > 0; i--) {
+
+            al = memoriaDeExecucao.get(al + 1);
+
+        }
+
+        pilhaDeAvaliacao.push(memoriaDeExecucao.get(al + CL_AL_ER_A_V - 1 + numero));
     }
 
     public void storeArg(int distancia, int numero) {
+
+        int al = memoriaDeExecucao.get(evp + 1);
+
+        for (int i = distancia; i > 0; i--) {
+
+            al = memoriaDeExecucao.get(al + 1);
+
+        }
+
+        memoriaDeExecucao.set(al + CL_AL_ER_A_V - 1 + numero, pilhaDeAvaliacao.pop());
+
     }
 
     /**
@@ -236,7 +256,10 @@ public class TISC {
 
     }
 
+    //TODO think about it
     public void setArg(int numero) {
+
+        int argValor = pilhaDeAvaliacao.pop();
     }
 
     /**
@@ -322,9 +345,11 @@ public class TISC {
 
     }
 
+    //TODO
     public void pushVar(int distancia, int numero) {
     }
 
+    //TODO
     public void storeVar(int distancia, int numero) {
 
         //caso distancia == 0, evp + CL_AR_ER_A_V + memExec.get(evp + 3) + numero
