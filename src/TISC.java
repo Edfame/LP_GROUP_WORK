@@ -12,7 +12,7 @@ public class TISC {
     private ArrayList<Integer> memoriaDeExecucao;
     private Stack<Integer> pilhaDeAvaliacao;
     private Hashtable<Etiqueta, Integer> etiquetas;
-    private int numeroDeInstrucoes, pc, evp;
+    private int numeroDeInstrucoes, pc, evp, pc1, distanciaCall;
 
     //Espaço ocupado pelo Control Link, Access Link, Endereço de Retorno, Argumentos e Variávies.
     public final int CL_AL_ER_A_V = 5;
@@ -29,6 +29,8 @@ public class TISC {
         numeroDeInstrucoes = 0;
         pc = 0;
         evp = -1;
+        pc1 = -1;
+        distanciaCall = -1;
 
     }
 
@@ -68,8 +70,8 @@ public class TISC {
 
     /*
      * Instruções
-     * */
-
+     *
+     */
     public void pushArg(int distancia, int numero) {
 
     }
@@ -149,7 +151,15 @@ public class TISC {
         pilhaDeAvaliacao.push(esquerda - direita);
     }
 
+    //TODO review
     public void call(int distancia, Etiqueta etiqueta) {
+
+        //memExec.get(memExec.get(evp) + 1) //AL anterior
+        pc1 = pc + 1;
+        distanciaCall = distancia;
+
+        jump(etiqueta);
+
     }
 
     //TODO review
@@ -159,21 +169,59 @@ public class TISC {
 
             evp++;
 
-            for (int i = 0; i < CL_AL_ER_A_V + argumentos + variaveis; i++) {
+            for (int i = 0; i < CL_AL_ER_A_V - 2; i++) {
+                memoriaDeExecucao.add(null);
+            }
+
+            //NUMERO DE ARGUMENTOS
+            memoriaDeExecucao.add(argumentos);
+
+            //NUMERO DE VARIAVEIS
+            memoriaDeExecucao.add(variaveis);
+
+            for (int i = 0; i < argumentos + variaveis; i++) {
                 memoriaDeExecucao.add(null);
             }
 
         } else {
 
             int alAtual = memoriaDeExecucao.get(evp + 1),
-                numeroArgumentosAtual = memoriaDeExecucao.get(evp + 3),
-                numeroVariaveisAtual = memoriaDeExecucao.get(evp + 4);
+                    numeroArgumentosAtual = memoriaDeExecucao.get(evp + 3),
+                    numeroVariaveisAtual = memoriaDeExecucao.get(evp + 4);
 
+            //CL
             memoriaDeExecucao.add(evp);
+
+            //AL
+            if (distanciaCall < 0) {
+                memoriaDeExecucao.add(evp);
+
+            } else if (distanciaCall > 0) {
+
+                int tempEvp = evp;
+
+                for (int i = distanciaCall; i > 0; i--) {
+                    tempEvp = memoriaDeExecucao.get(memoriaDeExecucao.get(tempEvp + 1));
+                }
+
+                memoriaDeExecucao.add(tempEvp + 1);
+
+            } else {
+                memoriaDeExecucao.add(alAtual);
+            }
 
             evp = evp + CL_AL_ER_A_V + numeroArgumentosAtual + numeroVariaveisAtual;
 
-            for (int i = 0; i < CL_AL_ER_A_V - 1 + argumentos + variaveis; i++) {
+            //ER
+            memoriaDeExecucao.add(pc1);
+
+            //NUMERO DE ARGUMENTOS
+            memoriaDeExecucao.add(argumentos);
+
+            //NUMERO DE VARIAVEIS
+            memoriaDeExecucao.add(variaveis);
+
+            for (int i = 0; i < argumentos + variaveis; i++) {
                 memoriaDeExecucao.add(null);
             }
         }
@@ -240,7 +288,7 @@ public class TISC {
 
         if (a == b) {
 
-            pc = etiquetas.get(etiqueta);
+            pc = etiquetas.get(etiqueta) - 1;
 
         }
     }
@@ -258,7 +306,7 @@ public class TISC {
 
         if (a > b) {
 
-            pc = etiquetas.get(etiqueta);
+            pc = etiquetas.get(etiqueta) - 1;
 
         }
     }
@@ -270,7 +318,7 @@ public class TISC {
      */
     public void jump(Etiqueta etiqueta) {
 
-        pc = etiquetas.get(etiqueta);
+        pc = etiquetas.get(etiqueta) - 1;
 
     }
 
@@ -278,6 +326,9 @@ public class TISC {
     }
 
     public void storeVar(int distancia, int numero) {
+
+        //caso distancia == 0, evp + CL_AR_ER_A_V + memExec.get(evp + 3) + numero
+        //else? distancia pode ser pos e neg?
     }
 
     /**
