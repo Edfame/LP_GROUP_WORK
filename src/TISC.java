@@ -10,6 +10,7 @@ public class TISC {
     //Variaveis da máquina com as quais as instruções interegem.
     private ArrayList<Instrucao> memoriaDeInstrucoes;
     private ArrayList<Integer> memoriaDeExecucao;
+    private ArrayList<Integer> argumentos;
     private Stack<Integer> pilhaDeAvaliacao;
     private Hashtable<Etiqueta, Integer> etiquetas;
     private int numeroDeInstrucoes, pc, evp, pc1, distanciaCall;
@@ -24,6 +25,7 @@ public class TISC {
 
         memoriaDeInstrucoes = new ArrayList<>();
         memoriaDeExecucao = new ArrayList<>();
+        argumentos = new ArrayList<>();
         pilhaDeAvaliacao = new Stack<>();
         etiquetas = new Hashtable<>();
         numeroDeInstrucoes = 0;
@@ -244,6 +246,14 @@ public class TISC {
             for (int i = 0; i < argumentos + variaveis; i++) {
                 memoriaDeExecucao.add(null);
             }
+
+            if (!this.argumentos.isEmpty()) {
+                for(int i = 0; i < this.argumentos.size(); i++) {
+                    memoriaDeExecucao.set(i + evp + CL_AL_ER_A_V, this.argumentos.get(i));
+                }
+            }
+
+            this.argumentos.clear();
         }
     }
 
@@ -259,7 +269,13 @@ public class TISC {
     //TODO think about it
     public void setArg(int numero) {
 
-        int argValor = pilhaDeAvaliacao.pop();
+        //Preencher a lista com null para que n dê exceção a acedar a uma posição não previamente alocada.
+        for(int i = 0; i <= numero; i++) {
+            this.argumentos.add(null);
+        }
+
+        argumentos.set(numero, pilhaDeAvaliacao.pop());
+
     }
 
     /**
