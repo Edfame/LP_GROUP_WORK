@@ -248,8 +248,8 @@ public class TISC {
             }
 
             if (!this.argumentos.isEmpty()) {
-                for(int i = 0; i < this.argumentos.size(); i++) {
-                    memoriaDeExecucao.set(i + evp + CL_AL_ER_A_V, this.argumentos.get(i));
+                for(int i = 1; i < this.argumentos.size(); i++) {
+                    memoriaDeExecucao.set(i + evp + CL_AL_ER_A_V - 1, this.argumentos.get(i));
                 }
             }
 
@@ -271,6 +271,9 @@ public class TISC {
 
         //Preencher a lista com null para que n dê exceção a acedar a uma posição não previamente alocada.
         for(int i = 0; i <= numero; i++) {
+            if(this.argumentos.get(i) != null) {
+                continue;
+            }
             this.argumentos.add(null);
         }
 
