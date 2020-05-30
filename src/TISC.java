@@ -384,6 +384,7 @@ public class TISC {
         printEtiquetas();
 
         //TODO ler o programa da memória e executá-lo.
+        this.pc = etiquetas.get(new Etiqueta("program"));
         while (this.pc < memoriaDeInstrucoes.size()) {
 
             memoriaDeInstrucoes.get(pc).executar(this);
