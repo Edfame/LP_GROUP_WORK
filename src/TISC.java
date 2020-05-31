@@ -31,7 +31,7 @@ public class TISC {
         numeroDeInstrucoes = 0;
         pc = 0;
         evp = -1;
-        pc1 = -1;
+        pc1 = 0;
         distanciaCall = -1;
 
     }
@@ -83,15 +83,15 @@ public class TISC {
      */
     public void pushArg(int distancia, int numero) {
 
-        int al = memoriaDeExecucao.get(evp + 1);
+        int ra = evp;
 
         for (int i = distancia; i > 0; i--) {
 
-            al = memoriaDeExecucao.get(al + 1);
+            ra = memoriaDeExecucao.get(ra + 1);
 
         }
 
-        pilhaDeAvaliacao.push(memoriaDeExecucao.get(al + CL_AL_ER_A_V - 1 + numero));
+        pilhaDeAvaliacao.push(memoriaDeExecucao.get(ra + CL_AL_ER_A_V - 1 + numero));
     }
 
     /**
@@ -102,15 +102,15 @@ public class TISC {
      */
     public void storeArg(int distancia, int numero) {
 
-        int al = memoriaDeExecucao.get(evp + 1);
+        int ra = evp;
 
         for (int i = distancia; i > 0; i--) {
 
-            al = memoriaDeExecucao.get(al + 1);
+            ra = memoriaDeExecucao.get(ra + 1);
 
         }
 
-        memoriaDeExecucao.set(al + CL_AL_ER_A_V - 1 + numero, pilhaDeAvaliacao.pop());
+        memoriaDeExecucao.set(ra + CL_AL_ER_A_V - 1 + numero, pilhaDeAvaliacao.pop());
 
     }
 
@@ -190,7 +190,7 @@ public class TISC {
     public void call(int distancia, Etiqueta etiqueta) {
 
         //memExec.get(memExec.get(evp) + 1) //AL anterior
-        pc1 = pc + 1;
+        pc1 = this.pc + 1;
         distanciaCall = distancia;
 
         jump(etiqueta);
@@ -220,29 +220,29 @@ public class TISC {
 
         } else {
 
-            int alAtual = memoriaDeExecucao.get(evp + 1),
-                    numeroArgumentosAtual = memoriaDeExecucao.get(evp + 3),
-                    numeroVariaveisAtual = memoriaDeExecucao.get(evp + 4);
+            int numeroArgumentosAtual = memoriaDeExecucao.get(evp + 3),
+                numeroVariaveisAtual = memoriaDeExecucao.get(evp + 4);
 
             //CL
             memoriaDeExecucao.add(evp);
 
             //AL
             if (distanciaCall < 0) {
+
+                //AL é igual ao evp.
                 memoriaDeExecucao.add(evp);
 
-            } else if (distanciaCall > 0) {
+            } else  {
 
-                int tempEvp = evp;
+                int tempEvp = memoriaDeExecucao.get(evp + 1);
 
                 for (int i = distanciaCall; i > 0; i--) {
-                    tempEvp = memoriaDeExecucao.get(memoriaDeExecucao.get(tempEvp + 1));
+                    tempEvp = memoriaDeExecucao.get(tempEvp + 1);
                 }
 
-                memoriaDeExecucao.add(tempEvp + 1);
+                //AL do bloco que dista distanciaCall.
+                memoriaDeExecucao.add(tempEvp);
 
-            } else {
-                memoriaDeExecucao.add(alAtual);
             }
 
             evp = evp + CL_AL_ER_A_V + numeroArgumentosAtual + numeroVariaveisAtual;
@@ -275,7 +275,13 @@ public class TISC {
      */
     public void returnInst() {
 
-        evp = memoriaDeExecucao.get(evp);
+        pc = evp == 0 ? memoriaDeInstrucoes.size() : memoriaDeExecucao.get(evp + 2) - 1;
+
+        try {
+            evp = memoriaDeExecucao.get(evp);
+        } catch(NullPointerException e) {
+            evp = -1;
+        }
 
     }
 
@@ -288,10 +294,12 @@ public class TISC {
 
         //Preencher a lista com null para que n dê exceção a acedar a uma posição não previamente alocada.
         for (int i = 0; i <= numero; i++) {
-            if (this.argumentos.get(i) != null) {
-                continue;
+
+            try {
+                this.argumentos.get(i);
+            } catch (NullPointerException | IndexOutOfBoundsException e) {
+                this.argumentos.add(null);
             }
-            this.argumentos.add(null);
         }
 
         argumentos.set(numero, pilhaDeAvaliacao.pop());
@@ -383,17 +391,18 @@ public class TISC {
 
     //TODO
     public void pushVar(int distancia, int numero) {
-        int al = memoriaDeExecucao.get(evp + 1),
-            numeroArgumentos;
+
+        int ra = evp,
+                numeroArgumentos;
 
         for (int i = distancia; i > 0; i--) {
 
-            al = memoriaDeExecucao.get(al + 1);
+            ra = memoriaDeExecucao.get(ra + 1);
 
         }
 
-        numeroArgumentos = memoriaDeExecucao.get(al + 3);
-        pilhaDeAvaliacao.push(memoriaDeExecucao.get(al + CL_AL_ER_A_V - 1 + numeroArgumentos + numero));
+        numeroArgumentos = memoriaDeExecucao.get(ra + 3);
+        pilhaDeAvaliacao.push(memoriaDeExecucao.get(ra + CL_AL_ER_A_V - 1 + numeroArgumentos + numero));
     }
 
     //TODO
@@ -402,17 +411,17 @@ public class TISC {
         //caso distancia == 0, evp + CL_AR_ER_A_V + memExec.get(evp + 3) + numero
         //else? distancia pode ser pos e neg?
 
-        int al = memoriaDeExecucao.get(evp + 1),
-            numeroArgumentos;
+        int ra = evp,
+                numeroArgumentos;
 
         for (int i = distancia; i > 0; i--) {
 
-            al = memoriaDeExecucao.get(al + 1);
+            ra = memoriaDeExecucao.get(ra + 1);
 
         }
 
-        numeroArgumentos = memoriaDeExecucao.get(al + 3);
-        memoriaDeExecucao.set(al + CL_AL_ER_A_V - 1 + numeroArgumentos + numero, pilhaDeAvaliacao.pop());
+        numeroArgumentos = memoriaDeExecucao.get(ra + 3);
+        memoriaDeExecucao.set(ra + CL_AL_ER_A_V - 1 + numeroArgumentos + numero, pilhaDeAvaliacao.pop());
     }
 
     /**
@@ -422,17 +431,19 @@ public class TISC {
 
         printMemoriaDeInstrucoes();
         printEtiquetas();
-        Etiqueta etiqueta = new Etiqueta("fact");
 
-        System.out.println(this.pc);
-        System.out.println(memoriaDeInstrucoes.size());
-        System.out.println(etiquetas.containsKey(etiqueta));
-        System.out.println(etiquetas.get(etiqueta));
+//        System.out.println(this.pc);
+//        System.out.println(memoriaDeInstrucoes.size());
+//        System.out.println(etiquetas.get(new Etiqueta("program")));
         //TODO ler o programa da memória e executá-lo.
         this.pc = etiquetas.get(new Etiqueta("program"));
         while (this.pc < memoriaDeInstrucoes.size()) {
 
+//            System.out.println(memoriaDeInstrucoes.get(pc));
             memoriaDeInstrucoes.get(pc).executar(this);
+
+//            System.out.println("\tPILHA: " + pilhaDeAvaliacao.toString());
+//            System.out.println("\tEXEC: " + memoriaDeExecucao.toString());
             pc++;
         }
     }

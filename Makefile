@@ -59,6 +59,7 @@ src/Yylex.class: src/Yylex.java src/registos.lex.java src/sym.class
 
 clean:
 	$(RM) $(INTERMEDIATE_FILES)
+	$(RM) src/*.lex.java
 	$(RM) src/*.class *~
 	$(RM) $(CLASSES)
 
