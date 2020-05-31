@@ -79,7 +79,7 @@ public class TISC {
      * Empilha na pilha de avaliação o valor do argumento em numero cuja profundidade do bloco é distancia.
      *
      * @param distancia distancia do bloco onde se encontra o argumento
-     * @param numero poscição do argumento
+     * @param numero    poscição do argumento
      */
     public void pushArg(int distancia, int numero) {
 
@@ -98,7 +98,7 @@ public class TISC {
      * Desempilha da pilha de avaliação o valor do topo e coloca-o no argumento cuja posição é numero e cuja profundidade do bloco onde este está corresponde a distancia.
      *
      * @param distancia distancia do bloco onde se encontra o argumento
-     * @param numero poscição do argumento
+     * @param numero    poscição do argumento
      */
     public void storeArg(int distancia, int numero) {
 
@@ -261,7 +261,7 @@ public class TISC {
             }
 
             if (!this.argumentos.isEmpty()) {
-                for(int i = 1; i < this.argumentos.size(); i++) {
+                for (int i = 1; i < this.argumentos.size(); i++) {
                     memoriaDeExecucao.set(i + evp + CL_AL_ER_A_V - 1, this.argumentos.get(i));
                 }
             }
@@ -287,8 +287,8 @@ public class TISC {
     public void setArg(int numero) {
 
         //Preencher a lista com null para que n dê exceção a acedar a uma posição não previamente alocada.
-        for(int i = 0; i <= numero; i++) {
-            if(this.argumentos.get(i) != null) {
+        for (int i = 0; i <= numero; i++) {
+            if (this.argumentos.get(i) != null) {
                 continue;
             }
             this.argumentos.add(null);
@@ -383,6 +383,17 @@ public class TISC {
 
     //TODO
     public void pushVar(int distancia, int numero) {
+        int al = memoriaDeExecucao.get(evp + 1),
+            numeroArgumentos;
+
+        for (int i = distancia; i > 0; i--) {
+
+            al = memoriaDeExecucao.get(al + 1);
+
+        }
+
+        numeroArgumentos = memoriaDeExecucao.get(al + 3);
+        pilhaDeAvaliacao.push(memoriaDeExecucao.get(al + CL_AL_ER_A_V - 1 + numeroArgumentos + numero));
     }
 
     //TODO
@@ -390,6 +401,18 @@ public class TISC {
 
         //caso distancia == 0, evp + CL_AR_ER_A_V + memExec.get(evp + 3) + numero
         //else? distancia pode ser pos e neg?
+
+        int al = memoriaDeExecucao.get(evp + 1),
+            numeroArgumentos;
+
+        for (int i = distancia; i > 0; i--) {
+
+            al = memoriaDeExecucao.get(al + 1);
+
+        }
+
+        numeroArgumentos = memoriaDeExecucao.get(al + 3);
+        memoriaDeExecucao.set(al + CL_AL_ER_A_V - 1 + numeroArgumentos + numero, pilhaDeAvaliacao.pop());
     }
 
     /**
@@ -399,7 +422,12 @@ public class TISC {
 
         printMemoriaDeInstrucoes();
         printEtiquetas();
+        Etiqueta etiqueta = new Etiqueta("fact");
 
+        System.out.println(this.pc);
+        System.out.println(memoriaDeInstrucoes.size());
+        System.out.println(etiquetas.containsKey(etiqueta));
+        System.out.println(etiquetas.get(etiqueta));
         //TODO ler o programa da memória e executá-lo.
         this.pc = etiquetas.get(new Etiqueta("program"));
         while (this.pc < memoriaDeInstrucoes.size()) {
