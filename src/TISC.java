@@ -275,14 +275,21 @@ public class TISC {
      */
     public void returnInst() {
 
+        int tempEvp;
+
         pc = evp == 0 ? memoriaDeInstrucoes.size() : memoriaDeExecucao.get(evp + 2) - 1;
 
         try {
-            evp = memoriaDeExecucao.get(evp);
+            tempEvp = memoriaDeExecucao.get(evp);
         } catch(NullPointerException e) {
-            evp = -1;
+            tempEvp = -1;
         }
 
+        for (int i = memoriaDeExecucao.size() - 1; i >= evp ; i--) {
+            memoriaDeExecucao.remove(i);
+        }
+
+        evp = tempEvp;
     }
 
     /**
@@ -432,18 +439,18 @@ public class TISC {
         printMemoriaDeInstrucoes();
         printEtiquetas();
 
-//        System.out.println(this.pc);
-//        System.out.println(memoriaDeInstrucoes.size());
-//        System.out.println(etiquetas.get(new Etiqueta("program")));
+        boolean verbose = false;
         //TODO ler o programa da memória e executá-lo.
         this.pc = etiquetas.get(new Etiqueta("program"));
         while (this.pc < memoriaDeInstrucoes.size()) {
 
-//            System.out.println(memoriaDeInstrucoes.get(pc));
+            if(verbose) System.out.println(memoriaDeInstrucoes.get(pc));
             memoriaDeInstrucoes.get(pc).executar(this);
 
-//            System.out.println("\tPILHA: " + pilhaDeAvaliacao.toString());
-//            System.out.println("\tEXEC: " + memoriaDeExecucao.toString());
+            if(verbose) {
+                System.out.println("\tPILHA: " + pilhaDeAvaliacao.toString());
+                System.out.println("\tEXEC: " + memoriaDeExecucao.toString());
+            }
             pc++;
         }
     }
