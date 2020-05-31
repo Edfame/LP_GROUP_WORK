@@ -74,6 +74,13 @@ public class TISC {
      * Instruções
      *
      */
+
+    /**
+     * Empilha na pilha de avaliação o valor do argumento em numero cuja profundidade do bloco é distancia.
+     *
+     * @param distancia distancia do bloco onde se encontra o argumento
+     * @param numero poscição do argumento
+     */
     public void pushArg(int distancia, int numero) {
 
         int al = memoriaDeExecucao.get(evp + 1);
@@ -87,6 +94,12 @@ public class TISC {
         pilhaDeAvaliacao.push(memoriaDeExecucao.get(al + CL_AL_ER_A_V - 1 + numero));
     }
 
+    /**
+     * Desempilha da pilha de avaliação o valor do topo e coloca-o no argumento cuja posição é numero e cuja profundidade do bloco onde este está corresponde a distancia.
+     *
+     * @param distancia distancia do bloco onde se encontra o argumento
+     * @param numero poscição do argumento
+     */
     public void storeArg(int distancia, int numero) {
 
         int al = memoriaDeExecucao.get(evp + 1);
@@ -266,7 +279,11 @@ public class TISC {
 
     }
 
-    //TODO think about it
+    /**
+     * Colocar o argumento numero numa posição acessível à função que vai ser chamada.
+     *
+     * @param numero posicção do argumento a ser alterado.
+     */
     public void setArg(int numero) {
 
         //Preencher a lista com null para que n dê exceção a acedar a uma posição não previamente alocada.
