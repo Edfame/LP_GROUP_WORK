@@ -36,8 +36,10 @@ public class TISC {
 
     }
 
-    /*
+    /**
      * Adiciona uma nova Instrução à memória de instruções.
+     *
+     * @param novaInstrucao instrução a ser adicionada.
      */
     public void adionarInstrucao(Instrucao novaInstrucao) {
 
@@ -46,8 +48,10 @@ public class TISC {
 
     }
 
-    /*
+    /**
      * Adiciona uma nova Etiqueta à HashTable das mesmas.
+     *
+     * @param novaEtiqueta Etiqueta a ser adicionada.
      */
     public void adicionarEtiqueta(Etiqueta novaEtiqueta) {
 
@@ -55,8 +59,8 @@ public class TISC {
 
     }
 
-    /*
-     * Percorre a memória de instruções de dá print das instruções dos respectivos argumentos.
+    /**
+     * Percorre a memória de instruções e escreve no standard output as instruções e os respectivos argumentos.
      */
     public void printMemoriaDeInstrucoes() {
 
@@ -65,21 +69,58 @@ public class TISC {
         }
     }
 
+    /**
+     * Escreve no standard output as Etiquetas presentes no progreama e as posições da instrução para a qual apontam.
+     */
     public void printEtiquetas() {
 
         System.out.println(etiquetas.toString());
     }
 
+    /**
+     * Dado o número de um bloco, devolve o valor do CL do mesmo.
+     */
+    private int getCL(int evp) {
+        return memoriaDeExecucao.get(evp);
+    }
+
+    /**
+     * Dado o número de um bloco, devolve o valor do AL do mesmo.
+     */
+    private int getAL(int evp) {
+        return memoriaDeExecucao.get(evp + 1);
+    }
+
+    /**
+     * Dado o número de um bloco, devolve o valor do ER do mesmo.
+     */
+    private int getER(int evp) {
+        return memoriaDeExecucao.get(evp + 2);
+    }
+
+    /**
+     * Dado o número de um bloco, devolve o valor do Numero de Argumentos do mesmo.
+     */
+    private int getNumeroArgumentos(int evp) {
+        return memoriaDeExecucao.get(evp + 3);
+    }
+
+    /**
+     * Dado o número de um bloco, devolve o valor do Numero de Variáveis do mesmo.
+     */
+    private int getNumeroInstrucoes(int evp) {
+        return memoriaDeExecucao.get(evp + 4);
+    }
+
     /*
      * Instruções
-     *
      */
 
     /**
      * Empilha na pilha de avaliação o valor do argumento em numero cuja profundidade do bloco é distancia.
      *
-     * @param distancia distancia do bloco onde se encontra o argumento
-     * @param numero    poscição do argumento
+     * @param distancia distancia do bloco onde se encontra o argumento.
+     * @param numero    poscição do argumento a alterar.
      */
     public void pushArg(int distancia, int numero) {
 
@@ -87,7 +128,7 @@ public class TISC {
 
         for (int i = distancia; i > 0; i--) {
 
-            ra = memoriaDeExecucao.get(ra + 1);
+            ra = getAL(ra);
 
         }
 
@@ -97,8 +138,8 @@ public class TISC {
     /**
      * Desempilha da pilha de avaliação o valor do topo e coloca-o no argumento cuja posição é numero e cuja profundidade do bloco onde este está corresponde a distancia.
      *
-     * @param distancia distancia do bloco onde se encontra o argumento
-     * @param numero    poscição do argumento
+     * @param distancia distancia do bloco onde se encontra o argumento.
+     * @param numero    poscição do argumento a ser alterado.
      */
     public void storeArg(int distancia, int numero) {
 
@@ -106,7 +147,7 @@ public class TISC {
 
         for (int i = distancia; i > 0; i--) {
 
-            ra = memoriaDeExecucao.get(ra + 1);
+            ra = getAL(ra);
 
         }
 
@@ -116,7 +157,7 @@ public class TISC {
 
     /**
      * Retira os dois elementos no topo da pilha
-     * e empilha a soma dos dois.
+     * e empilha a soma dos mesmos.
      */
     public void add() {
 
@@ -128,7 +169,7 @@ public class TISC {
 
     /**
      * Retira os dois elementos no topo da pilha
-     * e empilha a divisão dos dois.
+     * e empilha a divisão dos mesmos.
      */
     public void div() {
 
@@ -140,7 +181,7 @@ public class TISC {
 
     /**
      * Retira os dois elementos no topo da pilha
-     * e efetua a operação de pontenciação.
+     * e efetua a operação de exponenciação entre eles.
      */
     public void exp() {
 
@@ -164,7 +205,7 @@ public class TISC {
 
     /**
      * Retira os dois elementos no topo da pilha
-     * e empilha a multiplicação dos dois.
+     * e empilha a multiplicação dos mesmos.
      */
     public void mult() {
 
@@ -176,7 +217,7 @@ public class TISC {
 
     /**
      * Retira os dois elementos no topo da pilha
-     * e empilha a subtração dos dois.
+     * e empilha a subtração dos mesmos.
      */
     public void sub() {
 
@@ -186,10 +227,14 @@ public class TISC {
         pilhaDeAvaliacao.push(esquerda - direita);
     }
 
-    //TODO review
+    /**
+     * Chama a função cuja declaração está à profundidade distancia e é identificada por etiqueta.
+     *
+     * @param distancia profundidade da declaração da função chamada relativamente à função chamadora.
+     * @param etiqueta Etiqueta que identifica a função a ser chamada.
+     */
     public void call(int distancia, Etiqueta etiqueta) {
 
-        //memExec.get(memExec.get(evp) + 1) //AL anterior
         pc1 = this.pc + 1;
         distanciaCall = distancia;
 
@@ -197,7 +242,12 @@ public class TISC {
 
     }
 
-    //TODO review
+    /**
+     * Cria um novo Registo de Ativação(RA) com o número de argumentos e de variáveis iguais a argumentos e variávies respectivamente.
+     *
+     * @param argumentos numero de argumentos do RA.
+     * @param variaveis numero de variaveis do RA.
+     */
     public void locals(int argumentos, int variaveis) {
 
         if (evp == -1) {
@@ -220,8 +270,8 @@ public class TISC {
 
         } else {
 
-            int numeroArgumentosAtual = memoriaDeExecucao.get(evp + 3),
-                    numeroVariaveisAtual = memoriaDeExecucao.get(evp + 4);
+            int numeroArgumentosAtual = getNumeroArgumentos(evp),
+                numeroVariaveisAtual = getNumeroInstrucoes(evp);
 
             //CL
             memoriaDeExecucao.add(evp);
@@ -234,10 +284,10 @@ public class TISC {
 
             } else {
 
-                int tempEvp = memoriaDeExecucao.get(evp + 1);
+                int tempEvp = getAL(evp);
 
                 for (int i = distanciaCall; i > 0; i--) {
-                    tempEvp = memoriaDeExecucao.get(tempEvp + 1);
+                    tempEvp = getAL(tempEvp);
                 }
 
                 //AL do bloco que dista distanciaCall.
@@ -271,16 +321,16 @@ public class TISC {
     }
 
     /**
-     * Faz o environment pointer apontar para o Registo de Ativação anterior .
+     * Faz o environment pointer apontar para o Registo de Ativação anterior.
      */
     public void returnInst() {
 
         int tempEvp;
 
-        pc = evp == 0 ? memoriaDeInstrucoes.size() : memoriaDeExecucao.get(evp + 2) - 1;
+        pc = evp == 0 ? memoriaDeInstrucoes.size() : getER(evp) - 1;
 
         try {
-            tempEvp = memoriaDeExecucao.get(evp);
+            tempEvp = getCL(evp);
         } catch (NullPointerException e) {
             tempEvp = -1;
         }
@@ -293,13 +343,13 @@ public class TISC {
     }
 
     /**
-     * Colocar o argumento numero numa posição acessível à função que vai ser chamada.
+     * Coloca o argumento numero numa posição acessível à função que irá ser chamada.
      *
      * @param numero posicção do argumento a ser alterado.
      */
     public void setArg(int numero) {
 
-        //Preencher a lista com null para que n dê exceção a acedar a uma posição não previamente alocada.
+        //Preencher a lista com null para que não dê exceção ao acedar a uma posição previamente não alocada.
         for (int i = 0; i <= numero; i++) {
 
             try {
@@ -324,7 +374,7 @@ public class TISC {
     }
 
     /**
-     * Coloca no standart out o valor que está no topo da pilha.
+     * Coloca no standard out o valor que está no topo da pilha.
      */
     public void print() {
 
@@ -332,7 +382,7 @@ public class TISC {
     }
 
     /**
-     * Coloca no standart out "\n".
+     * Coloca no standard out "\n".
      */
     public void printNl() {
 
@@ -340,7 +390,7 @@ public class TISC {
     }
 
     /**
-     * Coloca no standart out a string passada.
+     * Coloca no standard out a string passada.
      *
      * @param string valor que é imprimido.
      */
@@ -386,7 +436,7 @@ public class TISC {
     }
 
     /**
-     * Salta para a etiqueta.
+     * Salta para a posição a que etiqueta refere.
      *
      * @param etiqueta aponta para a instrução para onde saltar.
      */
@@ -396,7 +446,13 @@ public class TISC {
 
     }
 
-    //TODO
+    /**
+     * Dada uma distância de um RA e a posição (numero) de uma variavel no mesmo,
+     * o seu valor é empilhado na pilha de avaliação.
+     *
+     * @param distancia profundidade do RA relativamente ao RA atual.
+     * @param numero posição do RA onde se encontra a variável.
+     */
     public void pushVar(int distancia, int numero) {
 
         int ra = evp,
@@ -404,19 +460,22 @@ public class TISC {
 
         for (int i = distancia; i > 0; i--) {
 
-            ra = memoriaDeExecucao.get(ra + 1);
+            ra = getAL(ra);
 
         }
 
-        numeroArgumentos = memoriaDeExecucao.get(ra + 3);
+        numeroArgumentos = getNumeroArgumentos(ra);
         pilhaDeAvaliacao.push(memoriaDeExecucao.get(ra + CL_AL_ER_A_V - 1 + numeroArgumentos + numero));
     }
 
-    //TODO
+    /**
+     * Dada uma distância de um RA e a posição (numero) de uma variável no mesmo,
+     * desempilha o valor do topo da pilha de avaliação e coloca-o na posição da variável.
+     *
+     * @param distancia profundidade do RA relativamente ao RA atual.
+     * @param numero posição do RA onde se encontra a variável.
+     */
     public void storeVar(int distancia, int numero) {
-
-        //caso distancia == 0, evp + CL_AR_ER_A_V + memExec.get(evp + 3) + numero
-        //else? distancia pode ser pos e neg?
 
         int ra = evp,
                 numeroArgumentos;
@@ -427,20 +486,24 @@ public class TISC {
 
         }
 
-        numeroArgumentos = memoriaDeExecucao.get(ra + 3);
+        numeroArgumentos = getNumeroArgumentos(ra);
         memoriaDeExecucao.set(ra + CL_AL_ER_A_V - 1 + numeroArgumentos + numero, pilhaDeAvaliacao.pop());
     }
 
     /**
-     * Executa o programa src.TISC carregado na maquina.
+     * Executa o programa TISC carregado na maquina.
      */
     public void executa() {
 
+        /*
         printMemoriaDeInstrucoes();
         printEtiquetas();
+        */
 
-        //TODO ler o programa da memória e executá-lo.
+        //O programa inicia-se na etiqueta "program".
         this.pc = etiquetas.get(new Etiqueta("program"));
+
+        //Lê o programa da memória e executá-lo.
         while (this.pc < memoriaDeInstrucoes.size()) {
 
             memoriaDeInstrucoes.get(pc).executar(this);
