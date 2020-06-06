@@ -164,7 +164,7 @@ public class TISC {
         int direita = pilhaDeAvaliacao.pop();
         int esquerda = pilhaDeAvaliacao.pop();
 
-        pilhaDeAvaliacao.push(direita + esquerda);
+        pilhaDeAvaliacao.push(esquerda + direita);
     }
 
     /**
@@ -212,7 +212,7 @@ public class TISC {
         int direita = pilhaDeAvaliacao.pop();
         int esquerda = pilhaDeAvaliacao.pop();
 
-        pilhaDeAvaliacao.push(direita * esquerda);
+        pilhaDeAvaliacao.push(esquerda * direita);
     }
 
     /**
