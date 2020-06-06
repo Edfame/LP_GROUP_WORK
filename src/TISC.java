@@ -10,7 +10,7 @@ public class TISC {
     //Variaveis da máquina com as quais as instruções interegem.
     private ArrayList<Instrucao> memoriaDeInstrucoes;
     private ArrayList<Integer> memoriaDeExecucao;
-    private ArrayList<Integer> argumentos;
+    private ArrayList<Integer> memoriaArgumentos;
     private Stack<Integer> pilhaDeAvaliacao;
     private Hashtable<Etiqueta, Integer> etiquetas;
     private int numeroDeInstrucoes, pc, evp, pc1, distanciaCall;
@@ -25,7 +25,7 @@ public class TISC {
 
         memoriaDeInstrucoes = new ArrayList<>();
         memoriaDeExecucao = new ArrayList<>();
-        argumentos = new ArrayList<>();
+        memoriaArgumentos = new ArrayList<>();
         pilhaDeAvaliacao = new Stack<>();
         etiquetas = new Hashtable<>();
         numeroDeInstrucoes = 0;
@@ -235,7 +235,7 @@ public class TISC {
      */
     public void call(int distancia, Etiqueta etiqueta) {
 
-        pc1 = this.pc + 1;
+        pc1 = pc + 1;
         distanciaCall = distancia;
 
         jump(etiqueta);
@@ -250,6 +250,7 @@ public class TISC {
      */
     public void locals(int argumentos, int variaveis) {
 
+        //Primeiro RA
         if (evp == -1) {
 
             evp++;
@@ -268,6 +269,7 @@ public class TISC {
                 memoriaDeExecucao.add(null);
             }
 
+        //Qualquer outro RA
         } else {
 
             int numeroArgumentosAtual = getNumeroArgumentos(evp),
@@ -310,13 +312,13 @@ public class TISC {
                 memoriaDeExecucao.add(null);
             }
 
-            if (!this.argumentos.isEmpty()) {
-                for (int i = 1; i < this.argumentos.size(); i++) {
-                    memoriaDeExecucao.set(i + evp + CL_AL_ER_A_V - 1, this.argumentos.get(i));
+            if (!memoriaArgumentos.isEmpty()) {
+                for (int i = 1; i < memoriaArgumentos.size(); i++) {
+                    memoriaDeExecucao.set(i + evp + CL_AL_ER_A_V - 1, memoriaArgumentos.get(i));
                 }
             }
 
-            this.argumentos.clear();
+            memoriaArgumentos.clear();
         }
     }
 
@@ -335,9 +337,7 @@ public class TISC {
             tempEvp = -1;
         }
 
-        for (int i = memoriaDeExecucao.size() - 1; i >= evp; i--) {
-            memoriaDeExecucao.remove(i);
-        }
+        memoriaDeExecucao.subList(evp, memoriaDeExecucao.size()).clear();
 
         evp = tempEvp;
     }
@@ -353,13 +353,13 @@ public class TISC {
         for (int i = 0; i <= numero; i++) {
 
             try {
-                this.argumentos.get(i);
+                memoriaArgumentos.get(i);
             } catch (NullPointerException | IndexOutOfBoundsException e) {
-                this.argumentos.add(null);
+                memoriaArgumentos.add(null);
             }
         }
 
-        argumentos.set(numero, pilhaDeAvaliacao.pop());
+        memoriaArgumentos.set(numero, pilhaDeAvaliacao.pop());
 
     }
 
@@ -456,7 +456,7 @@ public class TISC {
     public void pushVar(int distancia, int numero) {
 
         int ra = evp,
-                numeroArgumentos;
+            numeroArgumentos;
 
         for (int i = distancia; i > 0; i--) {
 
@@ -478,7 +478,7 @@ public class TISC {
     public void storeVar(int distancia, int numero) {
 
         int ra = evp,
-                numeroArgumentos;
+            numeroArgumentos;
 
         for (int i = distancia; i > 0; i--) {
 
